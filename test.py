@@ -88,10 +88,7 @@ paso1 = str(aa).replace(quitar1, '')
 paso2 = paso1.replace(quitar2, '')
 
 print(paso2)
-
 print('\n\n\n')
-
-
 
 
 coord_x1 = 242
@@ -113,35 +110,37 @@ for x in range(6):
         else:
             coord_x1 += 24
             coord_x2 += 24
-    coord_x1 = 195
-    coord_x2 = 212
+    coord_x1 = 242
+    coord_x2 = 259
     coord_y1 += 23
     coord_y2 += 23
 
 print(lista)
 
-
-
 import datetime
 now = datetime.datetime.now()
 
-quitar1 = '(255, 255, 255), '
-quitar2 = ', (255, 255, 255)'
+quitar_blanco1 = '(255, 255, 255), '
+quitar_blanco2 = ', (255, 255, 255)'
+quitar_azul1 = '(168, 198, 238), '
+quitar_azul2 = ', (168, 198, 238)'
 
 # recibe box=(x1, y1, x2, y2)
 def screenGrab(box):
     im = ImageGrab.grab(box)
-    im.save(os.getcwd() + '\\img\\test\\cenco' + str(now.date()) + str(box) + '.png', 'PNG')
+    #im.save(os.getcwd() + '\\img\\test\\cenco' + str(now.date()) + str(box) + '.png', 'PNG')
     return im
 
 
-time.sleep(5)
+time.sleep(10)
 for k, v in lista.items():
     text = open(k + '.txt', 'w')
     im = screenGrab(v)
     pix = [im.getpixel((x, y)) for x in range(0, v[2] - v[0]) for y in range(0, v[3] - v[1])]
-    paso1 = str(pix).replace(quitar1, '')
-    paso2 = paso1.replace(quitar2, '')
-    text.write(paso2)
+    paso1 = str(pix).replace(quitar_blanco1, '')
+    paso2 = paso1.replace(quitar_blanco2, '')
+    paso3 = paso2.replace(quitar_azul1, '')
+    pix = paso3.replace(quitar_azul2, '')
+    text.write(pix)
     text.close()
     print(k)

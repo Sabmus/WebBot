@@ -42,11 +42,11 @@ def left_click(x, y):
 # recibe box=(x1, y1, x2, y2)
 def screen_grab(box):
     im = ImageGrab.grab(box)
-    #im.save(os.getcwd() + '\\img\\test' + str(now.date()) + str(box) + '.png', 'PNG')
+    im.save(os.getcwd() + '\\img\\test' + str(now.date()) + str(box) + '.png', 'PNG')
     return im
 
 
-def buscadia():
+def buscadia(coordenadas, ruta):
     if day_cod == 0:  # pregunta si es LUNES
         day = day_number - 4  # si es lunes buscar el Viernes
     else:
@@ -59,7 +59,7 @@ def buscadia():
     quitar_azul1 = '(168, 198, 238), '
     quitar_azul2 = ', (168, 198, 238)'
 
-    map = open('mapeo_pix/' + str(day) + '.txt', 'r')
+    map = open(ruta + str(day) + '.txt', 'r')
     pix_buscado = map.read()
     print('pixel buscado: \n')
     print(pix_buscado)
@@ -67,7 +67,7 @@ def buscadia():
 
     # Magia
     if day <= 15:
-        for k, v in calendar_coord_smu.items():
+        for k, v in coordenadas.items():
             print(k)
             im = screen_grab(v)
             pix = [im.getpixel((x, y)) for x in range(0, v[2] - v[0]) for y in range(0, v[3] - v[1])]
@@ -81,7 +81,7 @@ def buscadia():
                 print('box' + box)
                 break
     elif day > 15:
-        for k, v in sorted(calendar_coord_smu.items(), key=lambda vector: int(vector[0]), reverse=True):
+        for k, v in sorted(coordenadas.items(), key=lambda vector: int(vector[0]), reverse=True):
             print(k)
             im = screen_grab(v)
             pix = [im.getpixel((x, y)) for x in range(0, v[2] - v[0]) for y in range(0, v[3] - v[1])]
@@ -95,9 +95,8 @@ def buscadia():
                 print('box' + box)
                 break
 
-    x = calendar_coord_smu.get(box)[0] + 3  # primera coordenada
-    y = calendar_coord_smu.get(box)[1] + 3  # segunda coordenada
-
+    x = coordenadas.get(box)[0] + 3  # primera coordenada
+    y = coordenadas.get(box)[1] + 3  # segunda coordenada
     return x, y
 
 
@@ -108,24 +107,7 @@ def smu():
     coord_y2 = 569
     cont = 1
     calendar_coord_smu = {}
-
-    # coordenadas de cajas
-    for x in range(6):  # 6 líneas de cajas
-        for y in range(7):  # 7 cajas por línea
-            print(coord_x1, coord_y1, coord_x2, coord_y2)
-            linea = {str(cont): (coord_x1, coord_y1, coord_x2, coord_y2)}
-            calendar_coord_smu.update(linea)
-            cont += 1
-            if y % 2 == 0:
-                coord_x1 += 25
-                coord_x2 += 25
-            else:
-                coord_x1 += 24
-                coord_x2 += 24
-        coord_x1 = 195
-        coord_x2 = 212
-        coord_y1 += 23
-        coord_y2 += 23
+    ruta_pix = 'mapeo_pix_smu/'
 
     # abro IE
     browser = webdriver.Ie(ie_driver)
@@ -157,83 +139,45 @@ def smu():
     left_click(193, 507)
     time.sleep(0.25)
 
-    if day_cod == 0:  # pregunta si es LUNES
-        day = day_number - 4  # si es lunes buscar el Viernes
-    else:
-        day = day_number - 2  # sino, busca el día anterior
-        print('dia buscado: ', day)
+    for x in range(6):  # 6 líneas de cajas
+        for y in range(7):  # 7 cajas por línea
+            print(coord_x1, coord_y1, coord_x2, coord_y2)
+            linea = {str(cont): (coord_x1, coord_y1, coord_x2, coord_y2)}
+            calendar_coord_smu.update(linea)
+            cont += 1
+            if y % 2 == 0:
+                coord_x1 += 25
+                coord_x2 += 25
+            else:
+                coord_x1 += 24
+                coord_x2 += 24
+        coord_x1 = 195
+        coord_x2 = 212
+        coord_y1 += 23
+        coord_y2 += 23
 
-    box = ''
-    quitar_blanco1 = '(255, 255, 255), '
-    quitar_blanco2 = ', (255, 255, 255)'
-    quitar_azul1 = '(168, 198, 238), '
-    quitar_azul2 = ', (168, 198, 238)'
-
-    map = open('mapeo_pix/' + str(day) + '.txt', 'r')
-    pix_buscado = map.read()
-    print('pixel buscado: \n')
-    print(pix_buscado)
-    print('\n\n')
-
-    # Magia
-    if day <= 15:
-        for k, v in calendar_coord_smu.items():
-            print(k)
-            im = screen_grab(v)
-            pix = [im.getpixel((x, y)) for x in range(0, v[2] - v[0]) for y in range(0, v[3] - v[1])]
-            paso1 = str(pix).replace(quitar_blanco1, '')
-            paso2 = paso1.replace(quitar_blanco2, '')
-            paso3 = paso2.replace(quitar_azul1, '')
-            pix = paso3.replace(quitar_azul2, '')
-            print(pix)
-            if pix == pix_buscado:
-                box = k
-                print('box' + box)
-                break
-    elif day > 15:
-        for k, v in sorted(calendar_coord_smu.items(), key=lambda vector: int(vector[0]), reverse=True):
-            print(k)
-            im = screen_grab(v)
-            pix = [im.getpixel((x, y)) for x in range(0, v[2] - v[0]) for y in range(0, v[3] - v[1])]
-            paso1 = str(pix).replace(quitar_blanco1, '')
-            paso2 = paso1.replace(quitar_blanco2, '')
-            paso3 = paso2.replace(quitar_azul1, '')
-            pix = paso3.replace(quitar_azul2, '')
-            print(pix)
-            if pix == pix_buscado:
-                box = k
-                print('box' + box)
-                break
-
-    x = calendar_coord_smu.get(box)[0] + 3  # primera coordenada
-    y = calendar_coord_smu.get(box)[1] + 3  # segunda coordenada
+    x, y = buscadia(calendar_coord_smu, ruta_pix)
     left_click(x, y)
     time.sleep(0.5)
 
     # generar informe
     left_click(423, 619)
     time.sleep(12)
-
     # descargar informe
     left_click(1163, 279)
     time.sleep(0.5)
-
     # CSV
     #left_click(606, 420)
     #time.sleep(2)
-
     # Excel
     #left_click(606, 463)
     #time.sleep(2)
-
     # seleccionar
     left_click(683, 502)
     time.sleep(3)
-
     # boton guardar
     left_click(633, 500)
     time.sleep(5)
-
     # click en url del explorador de windows
     left_click(371, 47)
     time.sleep(0.25)
@@ -252,11 +196,9 @@ def smu():
     # guardar en pc
     #left_click(513, 447)
     #time.sleep(2)
-
     # cerrar
     time.sleep(0.25)
     left_click(731, 500)
-
     # cerrar sesión
     left_click(1350, 132)
 
@@ -268,6 +210,7 @@ def cenco():
     coord_y2 = 545
     cont = 1
     calendar_coord_cenco = {}
+    ruta_pix = 'mapeo_pix_cenco/'
 
     browser = webdriver.Ie(ie_driver)
     browser.get(url_cenco)
@@ -277,19 +220,15 @@ def cenco():
     # seleccione país
     left_click(771, 404)
     time.sleep(0.25)
-
     # seleccione CHILE
     left_click(601, 435)
     time.sleep(0.25)
-
     # seleccione UN
     left_click(771, 465)
     time.sleep(0.25)
-
     # seleccione Supermercados
     left_click(625, 528)
     time.sleep(0.25)
-
     # Ingresar
     left_click(681, 512)
     time.sleep(2)
@@ -308,15 +247,12 @@ def cenco():
     # quita pop-pu
     left_click(1069, 283)
     time.sleep(0.25)
-
     # Click en Comercial
     left_click(424, 123)
     time.sleep(0.25)
-
     # Click en ventas
     left_click(424, 152)
     time.sleep(8)
-
     # Click en Calendario
     left_click(240, 482)
     time.sleep(0.25)
@@ -326,7 +262,7 @@ def cenco():
         for y in range(7):  # 7 cajas por línea
             print(coord_x1, coord_y1, coord_x2, coord_y2)
             linea = {str(cont): (coord_x1, coord_y1, coord_x2, coord_y2)}
-            calendar_coord_smu.update(linea)
+            calendar_coord_cenco.update(linea)
             cont += 1
             if y % 2 == 0:
                 coord_x1 += 25
@@ -334,13 +270,19 @@ def cenco():
             else:
                 coord_x1 += 24
                 coord_x2 += 24
-        coord_x1 = 195
-        coord_x2 = 212
+        coord_x1 = 242
+        coord_x2 = 259
         coord_y1 += 23
         coord_y2 += 23
 
+    x, y = buscadia(calendar_coord_cenco, ruta_pix)
+    left_click(x, y)
+    time.sleep(0.5)
+
+
 def main():
-    #smu()
+    smu()
+    time.sleep(2)
     cenco()
 
 

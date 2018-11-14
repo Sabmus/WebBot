@@ -120,7 +120,7 @@ def smu():
     print('\n\n')
 
     # Magia
-    if day <= 15:
+    if day <= 13:
         for k, v in calendar_coord_smu.items():
             print(k)
             im = screen_grab(v)
@@ -134,7 +134,7 @@ def smu():
                 box = k
                 print('box' + box)
                 break
-    elif day > 15:
+    elif day > 13:
         for k, v in sorted(calendar_coord_smu.items(), key=lambda vector: int(vector[0]), reverse=True):
             im = screen_grab(v)
             pix = [im.getpixel((x, y)) for x in range(0, v[2] - v[0]) for y in range(0, v[3] - v[1])]

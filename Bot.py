@@ -5,6 +5,8 @@ import datetime
 from PIL import ImageGrab
 from numpy import *
 from selenium import webdriver
+from pyunpack import Archive
+
 
 # driver de INTERNET EXPLORER
 ie_driver = "C:\\Users\\smunoz\\Documents\\Python\\WebBot\\IEDriverServer.exe"
@@ -14,21 +16,30 @@ chrome_driver = "C:\\Users\\smunoz\\Documents\\Python\\WebBot\\chromedriver.exe"
 user_smu = '17596472-K'
 pass_smu = 'Rita2018'
 url_smu = 'https://b2b.smu.cl//Supermercados/BBRe-commerce/access/login.do'
+ruta_archivo_smu = 'C:\WebBot\SMU'
+ruta_pix_smu = 'mapeo_pix_smu/'
 
 # datos Cencosud
 user_cenco = '166076633'
 pass_cenco = 'Rita2033'
 url_cenco = 'https://www.cenconlineb2b.com/'
+ruta_archivo_cenco = 'C:\WebBot\Cenco'
+ruta_pix_cenco = 'mapeo_pix_cenco/'
 
 # datos Tottus
-user_tottus = 'Rut VSR'
-pass_tottus = 'Rita 2020'
+rut_empresa = '86547900k'
+user_tottus = '166076633'
+pass_tottus = 'Rita2025'
 url_tottus = 'https://b2b.tottus.com/b2btoclpr/grafica/html/index.html'
+
+# datos Walmart
+user_wmt = 'Soc439a'
+pass_wmt = 'Vodkaskyy73'
+url_wmt = 'https://rllogin.wal-mart.com/rl_security/rl_logon.aspx?ServerType=IIS1&CTAuthMode=BASIC&language=en&CT_ORIG_URL=%2F&ct_orig_uri=%2F'
 
 now = datetime.datetime.now()
 day_number = now.day
 day_cod = time.gmtime().tm_wday  # 0 = Lunes
-
 print(now)
 print(day_number)
 print(day_cod)
@@ -107,13 +118,12 @@ def smu():
     coord_y2 = 569
     cont = 1
     calendar_coord_smu = {}
-    ruta_pix = 'mapeo_pix_smu/'
 
     # abro IE
     browser = webdriver.Ie(ie_driver)
     browser.get(url_smu)
 
-    time.sleep(7)
+    time.sleep(4)
     left_click(735, 386)
     time.sleep(0.1)
     pyautogui.typewrite(user_smu, interval=0.05)
@@ -123,21 +133,21 @@ def smu():
     left_click(711, 440)
 
     # click para sacar primer pop-up
-    time.sleep(25)
+    time.sleep(12)
     left_click(1076, 132)
-    time.sleep(0.25)
+    time.sleep(0.1)
     # click en comercial
     left_click(455, 132)
-    time.sleep(0.25)
+    time.sleep(0.1)
     # click en informe de ventas
     left_click(523, 184)
-    time.sleep(10)
+    time.sleep(5)
     # click para sacar segundo pop-up
     left_click(1076, 132)
-    time.sleep(0.25)
+    time.sleep(0.1)
     # calendario inicio
     left_click(193, 507)
-    time.sleep(0.25)
+    time.sleep(0.1)
 
     for x in range(6):  # 6 líneas de cajas
         for y in range(7):  # 7 cajas por línea
@@ -156,16 +166,16 @@ def smu():
         coord_y1 += 23
         coord_y2 += 23
 
-    x, y = buscadia(calendar_coord_smu, ruta_pix)
+    x, y = buscadia(calendar_coord_smu, ruta_pix_smu)
     left_click(x, y)
     time.sleep(0.5)
 
     # generar informe
     left_click(423, 619)
-    time.sleep(12)
+    time.sleep(8)
     # descargar informe
     left_click(1163, 279)
-    time.sleep(0.5)
+    time.sleep(0.3)
     # CSV
     #left_click(606, 420)
     #time.sleep(2)
@@ -174,22 +184,20 @@ def smu():
     #time.sleep(2)
     # seleccionar
     left_click(683, 502)
-    time.sleep(3)
+    time.sleep(0.25)
     # boton guardar
     left_click(633, 500)
-    time.sleep(5)
+    time.sleep(3)
     # click en url del explorador de windows
     left_click(371, 47)
     time.sleep(0.25)
 
-    pyautogui.typewrite('C:\WebBot\SMU', interval=0.01)
+    pyautogui.typewrite(ruta_archivo_smu, interval=0.01)
     pyautogui.press('enter')
 
     # click en nombre del explorador de windows
-    #left_click(614, 342)
-    #time.sleep(0.5)
-
-    #pyautogui.typewrite('archivo_' + str(int(time.time())), interval=0.1)
+    left_click(614, 342)
+    pyautogui.typewrite('archivo_' + str(now.date()) + '.rar', interval=0.01)
     time.sleep(1)
     pyautogui.press('enter')
 
@@ -201,6 +209,8 @@ def smu():
     left_click(731, 500)
     # cerrar sesión
     left_click(1350, 132)
+    #extraigo el rar
+    Archive(ruta_archivo_smu + '\\archivo_' + str(now.date()) + '.rar').extractall(ruta_archivo_smu)
 
 
 def cenco():
@@ -210,7 +220,6 @@ def cenco():
     coord_y2 = 545
     cont = 1
     calendar_coord_cenco = {}
-    ruta_pix = 'mapeo_pix_cenco/'
 
     browser = webdriver.Ie(ie_driver)
     browser.get(url_cenco)
@@ -275,15 +284,71 @@ def cenco():
         coord_y1 += 23
         coord_y2 += 23
 
-    x, y = buscadia(calendar_coord_cenco, ruta_pix)
+    x, y = buscadia(calendar_coord_cenco, ruta_pix_cenco)
     left_click(x, y)
     time.sleep(0.5)
+
+    # generar informe
+    left_click(422, 582)
+    time.sleep(12)
+    # descargar informe
+    left_click(1265, 294)
+    time.sleep(0.5)
+    # CSV
+    # left_click(606, 420)
+    # time.sleep(2)
+    # Excel
+    # left_click(606, 463)
+    # time.sleep(2)
+    # seleccionar
+    left_click(683, 502)
+    time.sleep(3)
+    # boton guardar
+    left_click(633, 500)
+    time.sleep(3)
+    # click en url del explorador de windows
+    left_click(371, 47)
+    time.sleep(0.25)
+
+    pyautogui.typewrite(ruta_archivo_cenco, interval=0.01)
+    pyautogui.press('enter')
+
+    # click en nombre del explorador de windows
+    left_click(614, 342)
+    pyautogui.typewrite('archivo_' + str(now.date()) + '.rar', interval=0.01)
+    time.sleep(0.1)
+    pyautogui.press('enter')
+
+    # guardar en pc
+    # left_click(513, 447)
+    # time.sleep(2)
+    # cerrar
+    time.sleep(0.25)
+    left_click(731, 500)
+    # cerrar sesión
+    left_click(1334, 124)
+    Archive(ruta_archivo_cenco + '\\archivo_' + str(now.date()) + '.rar').extractall(ruta_archivo_cenco)
+
+
+def wallmart():
+    browser = webdriver.Chrome(chrome_driver)
+    browser.get(url_wmt)
+
+    # mi usuario y doy next
+    username = browser.find_element_by_id('txtUser')
+    username.send_keys(user_wmt)
+    password = browser.find_element_by_id('txtPass')
+    password.send_keys(pass_wmt)
+    nextButton = browser.find_element_by_id('Login')
+    nextButton.click()
 
 
 def main():
     smu()
     time.sleep(2)
     cenco()
+    time.sleep(2)
+    wallmart()
 
 
 if __name__ == '__main__':

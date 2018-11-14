@@ -92,18 +92,20 @@ print(paso2)
 print('\n\n\n')
 
 
-coord_x1 = 195
-coord_y1 = 556
-coord_x2 = 212
-coord_y2 = 569
+
+
+coord_x1 = 242
+coord_y1 = 532
+coord_x2 = 259
+coord_y2 = 545
 cont = 1
 lista = {}
 
 for x in range(6):
     for y in range(7):
         print(coord_x1, coord_y1, coord_x2, coord_y2)
-        l = {str(cont): (coord_x1, coord_y1, coord_x2, coord_y2)}
-        lista.update(l)
+        li = {str(cont): (coord_x1, coord_y1, coord_x2, coord_y2)}
+        lista.update(li)
         cont += 1
         if y % 2 == 0:
             coord_x1 += 25
@@ -129,7 +131,7 @@ quitar2 = ', (255, 255, 255)'
 # recibe box=(x1, y1, x2, y2)
 def screenGrab(box):
     im = ImageGrab.grab(box)
-    im.save(os.getcwd() + '\\img\\test' + str(now.date()) + str(box) + '.png', 'PNG')
+    im.save(os.getcwd() + '\\img\\test\\cenco' + str(now.date()) + str(box) + '.png', 'PNG')
     return im
 
 

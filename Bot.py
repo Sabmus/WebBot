@@ -7,7 +7,8 @@ from numpy import *
 from selenium import webdriver
 
 # driver de INTERNET EXPLORER
-driver = "C:\\Users\\smunoz\\Documents\\Python\\WebBot\\IEDriverServer.exe"
+ie_driver = "C:\\Users\\smunoz\\Documents\\Python\\WebBot\\IEDriverServer.exe"
+chrome_driver = "C:\\Users\\smunoz\\Documents\\Python\\WebBot\\chromedriver.exe"
 
 # datos SMU
 user_smu = '17596472-K'
@@ -45,6 +46,61 @@ def screen_grab(box):
     return im
 
 
+def buscadia():
+    if day_cod == 0:  # pregunta si es LUNES
+        day = day_number - 4  # si es lunes buscar el Viernes
+    else:
+        day = day_number - 2  # sino, busca el día anterior
+        print('dia buscado: ', day)
+
+    box = ''
+    quitar_blanco1 = '(255, 255, 255), '
+    quitar_blanco2 = ', (255, 255, 255)'
+    quitar_azul1 = '(168, 198, 238), '
+    quitar_azul2 = ', (168, 198, 238)'
+
+    map = open('mapeo_pix/' + str(day) + '.txt', 'r')
+    pix_buscado = map.read()
+    print('pixel buscado: \n')
+    print(pix_buscado)
+    print('\n\n')
+
+    # Magia
+    if day <= 15:
+        for k, v in calendar_coord_smu.items():
+            print(k)
+            im = screen_grab(v)
+            pix = [im.getpixel((x, y)) for x in range(0, v[2] - v[0]) for y in range(0, v[3] - v[1])]
+            paso1 = str(pix).replace(quitar_blanco1, '')
+            paso2 = paso1.replace(quitar_blanco2, '')
+            paso3 = paso2.replace(quitar_azul1, '')
+            pix = paso3.replace(quitar_azul2, '')
+            print(pix)
+            if pix == pix_buscado:
+                box = k
+                print('box' + box)
+                break
+    elif day > 15:
+        for k, v in sorted(calendar_coord_smu.items(), key=lambda vector: int(vector[0]), reverse=True):
+            print(k)
+            im = screen_grab(v)
+            pix = [im.getpixel((x, y)) for x in range(0, v[2] - v[0]) for y in range(0, v[3] - v[1])]
+            paso1 = str(pix).replace(quitar_blanco1, '')
+            paso2 = paso1.replace(quitar_blanco2, '')
+            paso3 = paso2.replace(quitar_azul1, '')
+            pix = paso3.replace(quitar_azul2, '')
+            print(pix)
+            if pix == pix_buscado:
+                box = k
+                print('box' + box)
+                break
+
+    x = calendar_coord_smu.get(box)[0] + 3  # primera coordenada
+    y = calendar_coord_smu.get(box)[1] + 3  # segunda coordenada
+
+    return x, y
+
+
 def smu():
     coord_x1 = 195
     coord_y1 = 556
@@ -72,7 +128,7 @@ def smu():
         coord_y2 += 23
 
     # abro IE
-    browser = webdriver.Ie(driver)
+    browser = webdriver.Ie(ie_driver)
     browser.get(url_smu)
 
     time.sleep(7)
@@ -120,7 +176,7 @@ def smu():
     print('\n\n')
 
     # Magia
-    if day <= 13:
+    if day <= 15:
         for k, v in calendar_coord_smu.items():
             print(k)
             im = screen_grab(v)
@@ -134,8 +190,9 @@ def smu():
                 box = k
                 print('box' + box)
                 break
-    elif day > 13:
+    elif day > 15:
         for k, v in sorted(calendar_coord_smu.items(), key=lambda vector: int(vector[0]), reverse=True):
+            print(k)
             im = screen_grab(v)
             pix = [im.getpixel((x, y)) for x in range(0, v[2] - v[0]) for y in range(0, v[3] - v[1])]
             paso1 = str(pix).replace(quitar_blanco1, '')
@@ -204,8 +261,87 @@ def smu():
     left_click(1350, 132)
 
 
+def cenco():
+    coord_x1 = 242
+    coord_y1 = 532
+    coord_x2 = 259
+    coord_y2 = 545
+    cont = 1
+    calendar_coord_cenco = {}
+
+    browser = webdriver.Ie(ie_driver)
+    browser.get(url_cenco)
+    #opciones = browser.find_element_by_name('pais').send_keys('chile')
+
+    time.sleep(5)
+    # seleccione país
+    left_click(771, 404)
+    time.sleep(0.25)
+
+    # seleccione CHILE
+    left_click(601, 435)
+    time.sleep(0.25)
+
+    # seleccione UN
+    left_click(771, 465)
+    time.sleep(0.25)
+
+    # seleccione Supermercados
+    left_click(625, 528)
+    time.sleep(0.25)
+
+    # Ingresar
+    left_click(681, 512)
+    time.sleep(2)
+
+    # Login User
+    left_click(712, 423)
+    pyautogui.typewrite(user_cenco, interval=0.01)
+    #pyautogui.press('enter')
+    time.sleep(0.25)
+    # Login Paswword
+    left_click(712, 463)
+    pyautogui.typewrite(pass_cenco, interval=0.01)
+    pyautogui.press('enter')
+    time.sleep(12)
+
+    # quita pop-pu
+    left_click(1069, 283)
+    time.sleep(0.25)
+
+    # Click en Comercial
+    left_click(424, 123)
+    time.sleep(0.25)
+
+    # Click en ventas
+    left_click(424, 152)
+    time.sleep(8)
+
+    # Click en Calendario
+    left_click(240, 482)
+    time.sleep(0.25)
+
+    # coordenadas de cajas
+    for x in range(6):  # 6 líneas de cajas
+        for y in range(7):  # 7 cajas por línea
+            print(coord_x1, coord_y1, coord_x2, coord_y2)
+            linea = {str(cont): (coord_x1, coord_y1, coord_x2, coord_y2)}
+            calendar_coord_smu.update(linea)
+            cont += 1
+            if y % 2 == 0:
+                coord_x1 += 25
+                coord_x2 += 25
+            else:
+                coord_x1 += 24
+                coord_x2 += 24
+        coord_x1 = 195
+        coord_x2 = 212
+        coord_y1 += 23
+        coord_y2 += 23
+
 def main():
-    smu()
+    #smu()
+    cenco()
 
 
 if __name__ == '__main__':

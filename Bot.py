@@ -53,7 +53,7 @@ def left_click(x, y):
 # recibe box=(x1, y1, x2, y2)
 def screen_grab(box):
     im = ImageGrab.grab(box)
-    im.save(os.getcwd() + '\\img\\test' + str(now.date()) + str(box) + '.png', 'PNG')
+    #im.save(os.getcwd() + '\\img\\test' + str(now.date()) + str(box) + '.png', 'PNG')
     return im
 
 
@@ -175,7 +175,7 @@ def smu():
     time.sleep(8)
     # descargar informe
     left_click(1163, 279)
-    time.sleep(0.3)
+    time.sleep(1)
     # CSV
     #left_click(606, 420)
     #time.sleep(2)
@@ -184,28 +184,28 @@ def smu():
     #time.sleep(2)
     # seleccionar
     left_click(683, 502)
-    time.sleep(0.25)
+    time.sleep(2)
     # boton guardar
     left_click(633, 500)
     time.sleep(3)
     # click en url del explorador de windows
     left_click(371, 47)
     time.sleep(0.25)
-
     pyautogui.typewrite(ruta_archivo_smu, interval=0.01)
-    pyautogui.press('enter')
+    #pyautogui.press('enter')
 
     # click en nombre del explorador de windows
     left_click(614, 342)
+    time.sleep(0.25)
     pyautogui.typewrite('archivo_' + str(now.date()) + '.rar', interval=0.01)
-    time.sleep(1)
+    time.sleep(0.25)
     pyautogui.press('enter')
 
     # guardar en pc
     #left_click(513, 447)
     #time.sleep(2)
     # cerrar
-    time.sleep(0.25)
+    time.sleep(1)
     left_click(731, 500)
     # cerrar sesión
     left_click(1350, 132)
@@ -240,21 +240,23 @@ def cenco():
     time.sleep(0.25)
     # Ingresar
     left_click(681, 512)
-    time.sleep(2)
+    time.sleep(3)
 
     # Login User
     left_click(712, 423)
+    time.sleep(0.25)
     pyautogui.typewrite(user_cenco, interval=0.01)
     #pyautogui.press('enter')
     time.sleep(0.25)
     # Login Paswword
     left_click(712, 463)
+    time.sleep(0.25)
     pyautogui.typewrite(pass_cenco, interval=0.01)
     pyautogui.press('enter')
     time.sleep(12)
 
     # quita pop-pu
-    left_click(1069, 283)
+    #left_click(1069, 283)
     time.sleep(0.25)
     # Click en Comercial
     left_click(424, 123)
@@ -344,11 +346,12 @@ def wallmart():
 
 
 def main():
-    smu()
-    time.sleep(2)
+    #smu()
+    #time.sleep(2)
     cenco()
     time.sleep(2)
     wallmart()
+    time.sleep(2)
 
 
 if __name__ == '__main__':

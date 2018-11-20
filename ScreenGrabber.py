@@ -7,14 +7,13 @@ now = datetime.datetime.now()
 
 def screenGrab():
     im = ImageGrab.grab()
-    im.save(os.getcwd() + '\\img\\test' + str(int(time.time())) + '.png', 'PNG')
+    im.save(os.getcwd() + '\\img\\' + str(int(time.time())) + '.png', 'PNG')
 
 
 def main():
-    time.sleep(3)
+    time.sleep(5)
     screenGrab()
 
 
 if __name__ == '__main__':
     main()
-

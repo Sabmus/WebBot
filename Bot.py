@@ -2,6 +2,7 @@ import time
 import os
 import pyautogui
 import datetime
+import shutil
 from PIL import ImageGrab
 from numpy import *
 from selenium import webdriver
@@ -31,10 +32,12 @@ rut_empresa = '86547900k'
 user_tottus = '166076633'
 pass_tottus = 'Rita2025'
 url_tottus = 'https://b2b.tottus.com/b2btoclpr/grafica/html/index.html'
+ruta_archivo_tottus = 'C:\WebBot\Tottus'
+ruta_pix_tottus = 'mapeo_pix_tottus/'
 
 # datos Walmart
 user_wmt = 'Soc439a'
-pass_wmt = 'Vodkaskyy73'
+pass_wmt = 'Vodkaskyy74'
 url_wmt = 'https://rllogin.wal-mart.com/rl_security/rl_logon.aspx?ServerType=IIS1&CTAuthMode=BASIC&language=en&CT_ORIG_URL=%2F&ct_orig_uri=%2F'
 
 now = datetime.datetime.now()
@@ -57,7 +60,7 @@ def screen_grab(box):
     return im
 
 
-def buscadia(coordenadas, ruta):
+def buscadia(coordenadas, ruta, cadena="none"):
     if day_cod == 0:  # pregunta si es LUNES
         day = day_number - 4  # si es lunes buscar el Viernes
     else:
@@ -69,42 +72,74 @@ def buscadia(coordenadas, ruta):
     quitar_blanco2 = ', (255, 255, 255)'
     quitar_azul1 = '(168, 198, 238), '
     quitar_azul2 = ', (168, 198, 238)'
+    blanco = (250, 250, 250)
 
-    map = open(ruta + str(day) + '.txt', 'r')
+    file = ruta + str(day) + '.txt'
+    print(file)
+    map = open(file, 'r')
     pix_buscado = map.read()
     print('pixel buscado: \n')
     print(pix_buscado)
     print('\n\n')
 
-    # Magia
-    if day <= 15:
-        for k, v in coordenadas.items():
-            print(k)
-            im = screen_grab(v)
-            pix = [im.getpixel((x, y)) for x in range(0, v[2] - v[0]) for y in range(0, v[3] - v[1])]
-            paso1 = str(pix).replace(quitar_blanco1, '')
-            paso2 = paso1.replace(quitar_blanco2, '')
-            paso3 = paso2.replace(quitar_azul1, '')
-            pix = paso3.replace(quitar_azul2, '')
-            print(pix)
-            if pix == pix_buscado:
-                box = k
-                print('box' + box)
-                break
-    elif day > 15:
-        for k, v in sorted(coordenadas.items(), key=lambda vector: int(vector[0]), reverse=True):
-            print(k)
-            im = screen_grab(v)
-            pix = [im.getpixel((x, y)) for x in range(0, v[2] - v[0]) for y in range(0, v[3] - v[1])]
-            paso1 = str(pix).replace(quitar_blanco1, '')
-            paso2 = paso1.replace(quitar_blanco2, '')
-            paso3 = paso2.replace(quitar_azul1, '')
-            pix = paso3.replace(quitar_azul2, '')
-            print(pix)
-            if pix == pix_buscado:
-                box = k
-                print('box' + box)
-                break
+    if cadena == "none":
+        # Magia
+        if day <= 15:
+            for k, v in coordenadas.items():
+                print(k)
+                im = screen_grab(v)
+                pix = [im.getpixel((x, y)) for x in range(0, v[2] - v[0]) for y in range(0, v[3] - v[1])]
+                paso1 = str(pix).replace(quitar_blanco1, '')
+                paso2 = paso1.replace(quitar_blanco2, '')
+                paso3 = paso2.replace(quitar_azul1, '')
+                pix = paso3.replace(quitar_azul2, '')
+                print(pix)
+                if pix == pix_buscado:
+                    box = k
+                    print('box' + box)
+                    break
+        elif day > 15:
+            for k, v in sorted(coordenadas.items(), key=lambda vector: int(vector[0]), reverse=True):
+                print(k)
+                im = screen_grab(v)
+                pix = [im.getpixel((x, y)) for x in range(0, v[2] - v[0]) for y in range(0, v[3] - v[1])]
+                paso1 = str(pix).replace(quitar_blanco1, '')
+                paso2 = paso1.replace(quitar_blanco2, '')
+                paso3 = paso2.replace(quitar_azul1, '')
+                pix = paso3.replace(quitar_azul2, '')
+                print(pix)
+                if pix == pix_buscado:
+                    box = k
+                    print('box' + box)
+                    break
+    if cadena == "tottus":
+        # Magia
+        if day <= 15:
+            for k, v in coordenadas.items():
+                print(k)
+                im = screen_grab(v)
+                pix = [im.getpixel((x, y)) for x in range(0, v[2] - v[0]) for y in range(0, v[3] - v[1])]
+                for pos in range(len(pix)):
+                    if pix[pos] != blanco:
+                        pix[pos] = (0, 0, 0)
+                print(pix)
+                if pix == pix_buscado:
+                    box = k
+                    print('box' + box)
+                    break
+        elif day > 15:
+            for k, v in sorted(coordenadas.items(), key=lambda vector: int(vector[0]), reverse=True):
+                print(k)
+                im = screen_grab(v)
+                pix = [im.getpixel((x, y)) for x in range(0, v[2] - v[0]) for y in range(0, v[3] - v[1])]
+                for pos in range(len(pix)):
+                    if pix[pos] != blanco:
+                        pix[pos] = (0, 0, 0)
+                print(pix)
+                if pix == pix_buscado:
+                    box = k
+                    print('box' + box)
+                    break
 
     x = coordenadas.get(box)[0] + 3  # primera coordenada
     y = coordenadas.get(box)[1] + 3  # segunda coordenada
@@ -192,7 +227,7 @@ def smu():
     left_click(371, 47)
     time.sleep(0.25)
     pyautogui.typewrite(ruta_archivo_smu, interval=0.01)
-    #pyautogui.press('enter')
+    pyautogui.press('enter')
 
     # click en nombre del explorador de windows
     left_click(614, 342)
@@ -332,6 +367,80 @@ def cenco():
     Archive(ruta_archivo_cenco + '\\archivo_' + str(now.date()) + '.rar').extractall(ruta_archivo_cenco)
 
 
+def tottus():
+    coord_x1 = 476
+    coord_y1 = 348
+    coord_x2 = 493
+    coord_y2 = 358
+    cont = 1
+    calendar_coord_tottus = {}
+
+    browser = webdriver.Ie(ie_driver)
+    browser.get(url_tottus)
+
+    time.sleep(5)
+    # Rut Empresa
+    left_click(900, 276)
+    time.sleep(0.25)
+    pyautogui.typewrite(rut_empresa, interval=0.25)
+    # Uusario Tottus
+    left_click(900, 309)
+    time.sleep(0.25)
+    pyautogui.typewrite(user_tottus, interval=0.25)
+    # Password Tottus
+    left_click(900, 341)
+    time.sleep(0.25)
+    pyautogui.typewrite(pass_tottus, interval=0.25)
+    # Ingresar
+    left_click(925, 385)
+    time.sleep(5)
+
+    # Ventas
+    pyautogui.dragTo(159, 147, duration=1)
+    pyautogui.moveTo(159, 293, duration=0.1)
+    pyautogui.dragTo(229, 293, duration=1)
+    time.sleep(0.25)
+    left_click(230, 293)
+    time.sleep(0.25)
+    # Click en Calendario
+    left_click(473, 284)
+    time.sleep(0.25)
+
+    # coordenadas de cajas
+    for x in range(6):  # 6 líneas de cajas
+        for y in range(7):  # 7 cajas por línea
+            print(coord_x1, coord_y1, coord_x2, coord_y2)
+            linea = {str(cont): (coord_x1, coord_y1, coord_x2, coord_y2)}
+            calendar_coord_tottus.update(linea)
+            cont += 1
+            coord_x1 += 28
+            coord_x2 += 28
+        coord_x1 = 476
+        coord_x2 = 493
+        coord_y1 += 17
+        coord_y2 += 17
+
+    x, y = buscadia(calendar_coord_tottus, ruta_pix_tottus, cadena="tottus")
+    left_click(x, y)
+    time.sleep(0.5)
+
+    # check box
+    left_click(403, 39)
+    time.sleep(0.25)
+    # generar informe
+    left_click(682, 338)
+    time.sleep(12)
+    # descargar informe
+    left_click(985, 703)
+    time.sleep(0.5)
+    #mueve el archivo
+    shutil.move('C:\\Users\\smunoz\\Downloads\\datos.csv', 'C:\\WebBot\\Tottus\\datos.csv')
+
+    # cerrar
+    time.sleep(0.25)
+    left_click(882, 111)
+
+
 def wallmart():
     browser = webdriver.Chrome(chrome_driver)
     browser.get(url_wmt)
@@ -346,12 +455,13 @@ def wallmart():
 
 
 def main():
-    #smu()
+    smu()
+    time.sleep(2)
+    #cenco()
     #time.sleep(2)
-    cenco()
-    time.sleep(2)
-    wallmart()
-    time.sleep(2)
+    #wallmart()
+    #time.sleep(2)
+    tottus()
 
 
 if __name__ == '__main__':

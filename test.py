@@ -91,11 +91,11 @@ print('\n\n\n')
 
 
 
-'''
-coord_x1 = 242
-coord_y1 = 532
-coord_x2 = 259
-coord_y2 = 545
+
+coord_x1 = 476
+coord_y1 = 348
+coord_x2 = 493
+coord_y2 = 358
 cont = 1
 lista = {}
 
@@ -105,51 +105,53 @@ for x in range(6):
         li = {str(cont): (coord_x1, coord_y1, coord_x2, coord_y2)}
         lista.update(li)
         cont += 1
-        if y % 2 == 0:
-            coord_x1 += 25
-            coord_x2 += 25
-        else:
-            coord_x1 += 24
-            coord_x2 += 24
-    coord_x1 = 242
-    coord_x2 = 259
-    coord_y1 += 23
-    coord_y2 += 23
+        coord_x1 += 28
+        coord_x2 += 28
+    coord_x1 = 476
+    coord_x2 = 493
+    coord_y1 += 17
+    coord_y2 += 17
 
 print(lista)
+
 
 import datetime
 now = datetime.datetime.now()
 
 quitar_blanco1 = '(255, 255, 255), '
 quitar_blanco2 = ', (255, 255, 255)'
+'''
 quitar_azul1 = '(168, 198, 238), '
 quitar_azul2 = ', (168, 198, 238)'
+'''
 
 # recibe box=(x1, y1, x2, y2)
 def screenGrab(box):
     im = ImageGrab.grab(box)
-    #im.save(os.getcwd() + '\\img\\test\\cenco' + str(now.date()) + str(box) + '.png', 'PNG')
+    #im.save(os.getcwd() + '\\img\\test\\tottus' + str(now.date()) + str(box) + '.png', 'PNG')
     return im
 
 
-time.sleep(10)
+time.sleep(5)
+blanco = (250, 250, 250)
 for k, v in lista.items():
     text = open(k + '.txt', 'w')
     im = screenGrab(v)
     pix = [im.getpixel((x, y)) for x in range(0, v[2] - v[0]) for y in range(0, v[3] - v[1])]
-    paso1 = str(pix).replace(quitar_blanco1, '')
-    paso2 = paso1.replace(quitar_blanco2, '')
-    paso3 = paso2.replace(quitar_azul1, '')
-    pix = paso3.replace(quitar_azul2, '')
-    text.write(pix)
+    for pos in range(len(pix)):
+        if pix[pos] != blanco:
+            pix[pos] = (0, 0, 0)
+    text.write(str(pix))
     text.close()
     print(k)
+
+
+
 '''
-
-
 from pyunpack import Archive
 
 ruta_archivo_smu = 'C:\WebBot\SMU'
 now = datetime.datetime.now()
 Archive(ruta_archivo_smu + '\\archivo_' + str(now.date()) + '.rar').extractall(ruta_archivo_smu)
+
+'''

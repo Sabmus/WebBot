@@ -60,29 +60,35 @@ def screen_grab(box):
     return im
 
 
-def buscadia(coordenadas, ruta, cadena="none"):
+def buscadia(coordenadas, ruta, cadena='none', dia='none'):
     if day_cod == 0:  # pregunta si es LUNES
         day = day_number - 4  # si es lunes buscar el Viernes
     else:
         day = day_number - 2  # sino, busca el día anterior
         print('dia buscado: ', day)
 
+    if dia == 'hoy':
+        day = day_number
+
     box = ''
     quitar_blanco1 = '(255, 255, 255), '
     quitar_blanco2 = ', (255, 255, 255)'
     quitar_azul1 = '(168, 198, 238), '
     quitar_azul2 = ', (168, 198, 238)'
-    blanco = (250, 250, 250)
+    blanco = (255, 255, 255)
+    blanco1 = (250, 250, 250)
 
     file = ruta + str(day) + '.txt'
     print(file)
     map = open(file, 'r')
     pix_buscado = map.read()
+    print('-----------------------------')
     print('pixel buscado: \n')
     print(pix_buscado)
+    print('-----------------------------')
     print('\n\n')
 
-    if cadena == "none":
+    if cadena == 'none':
         # Magia
         if day <= 15:
             for k, v in coordenadas.items():
@@ -112,7 +118,7 @@ def buscadia(coordenadas, ruta, cadena="none"):
                     box = k
                     print('box' + box)
                     break
-    if cadena == "tottus":
+    if cadena == 'tottus':
         # Magia
         if day <= 15:
             for k, v in coordenadas.items():
@@ -120,10 +126,12 @@ def buscadia(coordenadas, ruta, cadena="none"):
                 im = screen_grab(v)
                 pix = [im.getpixel((x, y)) for x in range(0, v[2] - v[0]) for y in range(0, v[3] - v[1])]
                 for pos in range(len(pix)):
-                    if pix[pos] != blanco:
+                    if pix[pos] == blanco:
+                        pix[pos] = blanco1
+                    if pix[pos] != blanco1:
                         pix[pos] = (0, 0, 0)
                 print(pix)
-                if pix == pix_buscado:
+                if str(pix) == pix_buscado:
                     box = k
                     print('box' + box)
                     break
@@ -133,12 +141,14 @@ def buscadia(coordenadas, ruta, cadena="none"):
                 im = screen_grab(v)
                 pix = [im.getpixel((x, y)) for x in range(0, v[2] - v[0]) for y in range(0, v[3] - v[1])]
                 for pos in range(len(pix)):
-                    if pix[pos] != blanco:
+                    if pix[pos] == blanco:
+                        pix[pos] = blanco1
+                    if pix[pos] != blanco1:
                         pix[pos] = (0, 0, 0)
                 print(pix)
-                if pix == pix_buscado:
+                if str(pix) == pix_buscado:
                     box = k
-                    print('box' + box)
+                    print('encontrado en: box' + box)
                     break
 
     x = coordenadas.get(box)[0] + 3  # primera coordenada
@@ -368,12 +378,19 @@ def cenco():
 
 
 def tottus():
-    coord_x1 = 476
-    coord_y1 = 348
-    coord_x2 = 493
-    coord_y2 = 358
-    cont = 1
-    calendar_coord_tottus = {}
+    coord_ini_x1 = 476
+    coord_ini_y1 = 348
+    coord_ini_x2 = 493
+    coord_ini_y2 = 358
+    cont_ini = 1
+    calendar_coord_tottus_inicio = {}
+
+    coord_fin_x1 = 1059
+    coord_fin_y1 = 348
+    coord_fin_x2 = 1076
+    coord_fin_y2 = 358
+    cont_fin = 1
+    calendar_coord_tottus_fin = {}
 
     browser = webdriver.Ie(ie_driver)
     browser.get(url_tottus)
@@ -382,15 +399,15 @@ def tottus():
     # Rut Empresa
     left_click(900, 276)
     time.sleep(0.25)
-    pyautogui.typewrite(rut_empresa, interval=0.25)
+    pyautogui.typewrite(rut_empresa, interval=0.15)
     # Uusario Tottus
     left_click(900, 309)
     time.sleep(0.25)
-    pyautogui.typewrite(user_tottus, interval=0.25)
+    pyautogui.typewrite(user_tottus, interval=0.15)
     # Password Tottus
     left_click(900, 341)
     time.sleep(0.25)
-    pyautogui.typewrite(pass_tottus, interval=0.25)
+    pyautogui.typewrite(pass_tottus, interval=0.15)
     # Ingresar
     left_click(925, 385)
     time.sleep(5)
@@ -398,44 +415,81 @@ def tottus():
     # Ventas
     pyautogui.dragTo(159, 147, duration=1)
     pyautogui.moveTo(159, 293, duration=0.1)
-    pyautogui.dragTo(229, 293, duration=1)
+    pyautogui.dragTo(169, 293, duration=0.5)
     time.sleep(0.25)
     left_click(230, 293)
     time.sleep(0.25)
-    # Click en Calendario
+
+    if day_cod == 0:  # pregunta si es LUNES
+        fecha = datetime.datetime.today() - datetime.timedelta(days=4)  # si es lunes buscar el Viernes
+    else:
+        fecha = datetime.datetime.today() - datetime.timedelta(days=2)  # sino, busca el día anterior
+
+    # Click en Calendario_inicio
+    left_click(452, 287)
+    time.sleep(0.25)
+    pyautogui.typewrite(str(fecha.strftime("%d/%m/%Y")), interval=0.15)
+
+    left_click(1033, 287)
+    time.sleep(0.25)
+    hoy = datetime.datetime.today()
+    pyautogui.typewrite(str(hoy.strftime("%d/%m/%Y")), interval=0.15)
+
+    '''
+    # Click en Calendario_inicio
     left_click(473, 284)
     time.sleep(0.25)
-
+    
     # coordenadas de cajas
     for x in range(6):  # 6 líneas de cajas
         for y in range(7):  # 7 cajas por línea
-            print(coord_x1, coord_y1, coord_x2, coord_y2)
-            linea = {str(cont): (coord_x1, coord_y1, coord_x2, coord_y2)}
-            calendar_coord_tottus.update(linea)
-            cont += 1
-            coord_x1 += 28
-            coord_x2 += 28
-        coord_x1 = 476
-        coord_x2 = 493
-        coord_y1 += 17
-        coord_y2 += 17
+            print(coord_ini_x1, coord_ini_y1, coord_ini_x2, coord_ini_y2)
+            linea = {str(cont_ini): (coord_ini_x1, coord_ini_y1, coord_ini_x2, coord_ini_y2)}
+            calendar_coord_tottus_inicio.update(linea)
+            cont_ini += 1
+            coord_ini_x1 += 28
+            coord_ini_x2 += 28
+        coord_ini_x1 = 476
+        coord_ini_x2 = 493
+        coord_ini_y1 += 17
+        coord_ini_y2 += 17
 
-    x, y = buscadia(calendar_coord_tottus, ruta_pix_tottus, cadena="tottus")
+    x, y = buscadia(calendar_coord_tottus_inicio, ruta_pix_tottus, cadena="tottus")
     left_click(x, y)
     time.sleep(0.5)
+    
+    # Click en Calendario_fin
+    left_click(1056, 283)
+    time.sleep(0.25)
+    # coordenadas de cajas
+    for x in range(6):  # 6 líneas de cajas
+        for y in range(7):  # 7 cajas por línea
+            print(coord_fin_x1, coord_fin_y1, coord_fin_x2, coord_fin_y2)
+            linea = {str(cont_fin): (coord_fin_x1, coord_fin_y1, coord_fin_x2, coord_fin_y2)}
+            calendar_coord_tottus_fin.update(linea)
+            cont_fin += 1
+            coord_fin_x1 += 28
+            coord_fin_x2 += 28
+        coord_fin_x1 = 1059
+        coord_fin_x2 = 1076
+        coord_fin_y1 += 17
+        coord_fin_y2 += 17
 
+    x, y = buscadia(calendar_coord_tottus_fin, ruta_pix_tottus, cadena='tottus', dia='hoy')
+    left_click(x, y)
+    time.sleep(0.5)
+    '''
     # check box
-    left_click(403, 39)
+    left_click(403, 309)
     time.sleep(0.25)
     # generar informe
     left_click(682, 338)
-    time.sleep(12)
+    time.sleep(10)
     # descargar informe
     left_click(985, 703)
-    time.sleep(0.5)
+    time.sleep(10)
     #mueve el archivo
-    shutil.move('C:\\Users\\smunoz\\Downloads\\datos.csv', 'C:\\WebBot\\Tottus\\datos.csv')
-
+    shutil.move('C:/Users/smunoz/Downloads/datos.csv', 'C:/WebBot/Tottus/datos.csv')
     # cerrar
     time.sleep(0.25)
     left_click(882, 111)
@@ -457,11 +511,10 @@ def wallmart():
 def main():
     smu()
     time.sleep(2)
-    #cenco()
-    #time.sleep(2)
-    #wallmart()
-    #time.sleep(2)
+    cenco()
+    time.sleep(2)
     tottus()
+    time.sleep(2)
 
 
 if __name__ == '__main__':

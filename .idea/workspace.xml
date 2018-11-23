@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1f2ba7ba-cfc1-472b-b4be-a0b365f86394" name="Default Changelist" comment="Orden de código. Agregado proceso de Cenco. Agregado descompresión de rars. Agregado parte de proceso Wallmart">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/Bot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,13 +17,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Bot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="73">
-              <caret line="273" lean-forward="true" selection-start-line="273" selection-end-line="273" />
+            <state relative-caret-position="345">
+              <caret line="552" column="4" lean-forward="true" selection-start-line="552" selection-start-column="4" selection-end-line="552" selection-end-column="4" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
-                <marker date="1542986108596" expanded="true" signature="1671:1672" ph="..." />
-                <marker date="1542986108596" expanded="true" signature="14606:15420" ph="..." />
-                <marker date="1542986108596" expanded="true" signature="15431:15436" ph="..." />
+                <marker date="1542989163626" expanded="true" signature="1671:1672" ph="..." />
+                <marker date="1542989163626" expanded="true" signature="14606:15420" ph="..." />
+                <marker date="1542989163626" expanded="true" signature="15431:15436" ph="..." />
               </folding>
             </state>
           </provider>
@@ -32,8 +32,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1445">
-              <caret line="90" selection-start-line="90" selection-end-line="90" />
+            <state relative-caret-position="238">
+              <caret line="101" selection-start-line="101" selection-end-line="102" selection-end-column="30" />
               <folding>
                 <element signature="e#1#12#0" expanded="true" />
               </folding>
@@ -119,10 +119,10 @@
       <list>
         <option value="$PROJECT_DIR$/../LSTM/LSTM.py" />
         <option value="$PROJECT_DIR$/ScreenGrabber.py" />
-        <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/asd.py" />
-        <option value="$PROJECT_DIR$/Bot.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/test.py" />
+        <option value="$PROJECT_DIR$/Bot.py" />
       </list>
     </option>
   </component>
@@ -167,7 +167,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Bot">
+  <component name="RunManager" selected="Python.test">
     <configuration name="Bot" type="PythonConfigurationType" factoryName="Python">
       <module name="WebBot" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -368,8 +368,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.asd" />
         <item itemvalue="Python.test" />
+        <item itemvalue="Python.asd" />
         <item itemvalue="Python.ScreenGrabber" />
       </list>
     </recent_temporary>
@@ -443,7 +443,7 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20238096" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20238096" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -612,16 +612,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1445">
-          <caret line="90" selection-start-line="90" selection-end-line="90" />
-          <folding>
-            <element signature="e#1#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ScreenGrabber.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -649,15 +639,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="101" selection-start-line="101" selection-end-line="102" selection-end-column="30" />
+          <folding>
+            <element signature="e#1#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Bot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="73">
-          <caret line="273" lean-forward="true" selection-start-line="273" selection-end-line="273" />
+        <state relative-caret-position="345">
+          <caret line="552" column="4" lean-forward="true" selection-start-line="552" selection-start-column="4" selection-end-line="552" selection-end-column="4" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
-            <marker date="1542986108596" expanded="true" signature="1671:1672" ph="..." />
-            <marker date="1542986108596" expanded="true" signature="14606:15420" ph="..." />
-            <marker date="1542986108596" expanded="true" signature="15431:15436" ph="..." />
+            <marker date="1542989163626" expanded="true" signature="1671:1672" ph="..." />
+            <marker date="1542989163626" expanded="true" signature="14606:15420" ph="..." />
+            <marker date="1542989163626" expanded="true" signature="15431:15436" ph="..." />
           </folding>
         </state>
       </provider>

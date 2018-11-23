@@ -90,12 +90,33 @@ print(paso2)
 print('\n\n\n')
 
 
+
+import schedule
+import time
+import datetime
+
+def job():
+    print("I'm working... " + str(datetime.datetime.now()))
+
+
+#schedule.every(1).minutes.do(job)
+#schedule.every().hour.do(job)
+schedule.every().day.at("12:58").do(job)
+
+while 1:
+    schedule.run_pending()
+    time.sleep(1)
+
+
+
+
+
+
+'''
 import shutil
 print("moviendo")
 shutil.move('C:/Users/smunoz/Downloads/datos.csv', 'C:/WebBot/Tottus/datos.csv')
-
-
-
+'''
 
 
 '''

@@ -532,6 +532,35 @@ def main():
     time.sleep(2)
     wallmart()
     time.sleep(2)
+    '''
+    # pasar a TXT
+    import csv
+    csv_file = raw_input('Enter the name of your input file: ')
+    txt_file = raw_input('Enter the name of your output file: ')
+    with open(txt_file, "w") as my_output_file:
+        with open(csv_file, "r") as my_input_file:
+            [my_output_file.write(" ".join(row) + '\n') for row in csv.reader(my_input_file)]
+        my_output_file.close()
+    
+    # scheduler
+    https://github.com/dbader/schedule/blob/master/test_schedule.py
+    import schedule
+    import time
+    
+    def job(t):
+        print "I'm working...", t
+        return
+    
+    
+    #schedule.every(1).minutes.do(job)
+    #schedule.every().hour.do(job)
+    schedule.every().day.at("01:00").do(job,'It is 01:00')
+    
+    while True:
+        schedule.run_pending()
+        time.sleep(60) # wait one minute
+    CORRER CON: nohup python2.7 MyScheduledProgram.py &
+    '''
 
 
 if __name__ == '__main__':

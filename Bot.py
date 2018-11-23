@@ -39,6 +39,8 @@ ruta_pix_tottus = 'mapeo_pix_tottus/'
 user_wmt = 'Soc439a'
 pass_wmt = 'Vodkaskyy74'
 url_wmt = 'https://rllogin.wal-mart.com/rl_security/rl_logon.aspx?ServerType=IIS1&CTAuthMode=BASIC&language=en&CT_ORIG_URL=%2F&ct_orig_uri=%2F'
+url_wmt_dl = 'https://retaillink.wal-mart.com/decision_support/Status_retrieve_request.aspx?questionid=Q1362&applicationid=300&JobId=579158208&status=D&Extension=txt&filename=/Outbound05/soc439a_579158208_69D44D63XECF4X4F80X8C1DXB34BD62A8C90&reqname=Sell%20Out%20Walmart%20VSR%20(Bot%20Planeamiento-No%20Borrar),579158208'
+ruta_archivo_wallmart = 'C:\WebBot\Wallmart'
 
 now = datetime.datetime.now()
 day_number = now.day
@@ -308,7 +310,7 @@ def cenco():
     time.sleep(0.25)
     # Click en ventas
     left_click(424, 152)
-    time.sleep(8)
+    time.sleep(10)
     # Click en Calendario
     left_click(240, 482)
     time.sleep(0.25)
@@ -337,10 +339,10 @@ def cenco():
 
     # generar informe
     left_click(422, 582)
-    time.sleep(12)
+    time.sleep(15)
     # descargar informe
     left_click(1265, 294)
-    time.sleep(0.5)
+    time.sleep(3)
     # CSV
     # left_click(606, 420)
     # time.sleep(2)
@@ -349,17 +351,16 @@ def cenco():
     # time.sleep(2)
     # seleccionar
     left_click(683, 502)
-    time.sleep(3)
+    time.sleep(5)
     # boton guardar
     left_click(633, 500)
-    time.sleep(3)
+    time.sleep(5)
+
     # click en url del explorador de windows
     left_click(371, 47)
     time.sleep(0.25)
-
     pyautogui.typewrite(ruta_archivo_cenco, interval=0.01)
     pyautogui.press('enter')
-
     # click en nombre del explorador de windows
     left_click(614, 342)
     pyautogui.typewrite('archivo_' + str(now.date()) + '.rar', interval=0.01)
@@ -506,6 +507,20 @@ def wallmart():
     password.send_keys(pass_wmt)
     nextButton = browser.find_element_by_id('Login')
     nextButton.click()
+    browser.get(url_wmt_dl)
+    time.sleep(30)
+    pyautogui.hotkey('ctrl', 's')
+
+    # click en url del explorador de windows
+    left_click(371, 47)
+    time.sleep(0.25)
+    pyautogui.typewrite(ruta_archivo_wallmart, interval=0.01)
+    pyautogui.press('enter')
+    # click en nombre del explorador de windows
+    left_click(614, 342)
+    pyautogui.typewrite('archivo_' + str(now.date()) + '.txt', interval=0.01)
+    time.sleep(0.1)
+    pyautogui.press('enter')
 
 
 def main():
@@ -514,6 +529,8 @@ def main():
     cenco()
     time.sleep(2)
     tottus()
+    time.sleep(2)
+    wallmart()
     time.sleep(2)
 
 

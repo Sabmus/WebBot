@@ -39,7 +39,7 @@ ruta_pix_tottus = 'mapeo_pix_tottus/'
 user_wmt = 'Soc439a'
 pass_wmt = 'Vodkaskyy74'
 url_wmt = 'https://rllogin.wal-mart.com/rl_security/rl_logon.aspx?ServerType=IIS1&CTAuthMode=BASIC&language=en&CT_ORIG_URL=%2F&ct_orig_uri=%2F'
-url_wmt_dl = 'https://retaillink.wal-mart.com/decision_support/Status_retrieve_request.aspx?questionid=Q1362&applicationid=300&JobId=579158208&status=D&Extension=txt&filename=/Outbound05/soc439a_579158208_69D44D63XECF4X4F80X8C1DXB34BD62A8C90&reqname=Sell%20Out%20Walmart%20VSR%20(Bot%20Planeamiento-No%20Borrar),579158208'
+url_wmt_dl = 'https://retaillink.wal-mart.com'
 ruta_archivo_wallmart = 'C:\WebBot\Wallmart'
 
 now = datetime.datetime.now()
@@ -379,6 +379,7 @@ def cenco():
 
 
 def tottus():
+    '''
     coord_ini_x1 = 476
     coord_ini_y1 = 348
     coord_ini_x2 = 493
@@ -392,6 +393,7 @@ def tottus():
     coord_fin_y2 = 358
     cont_fin = 1
     calendar_coord_tottus_fin = {}
+    '''
 
     browser = webdriver.Ie(ie_driver)
     browser.get(url_tottus)
@@ -507,7 +509,19 @@ def wallmart():
     password.send_keys(pass_wmt)
     nextButton = browser.find_element_by_id('Login')
     nextButton.click()
-    browser.get(url_wmt_dl)
+
+    containers = browser.find_elements_by_xpath('//i[@class="icon-download-alt mediumBlueIcon downloadIcon"]')
+    print('print containers:\n\n ')
+    print(containers)
+    print('\n\n')
+    for item in containers:
+        print(item.get_attribute('id'))
+        if 'Sell Out Walmart VSR (Bot Planeamiento-No Borrar)' in item.get_attribute('id'):
+            url = url_wmt_dl + item.get_attribute('id')
+            print('url: ' + url)
+            break
+
+    browser.get(url)
     time.sleep(30)
     pyautogui.hotkey('ctrl', 's')
 

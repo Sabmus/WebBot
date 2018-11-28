@@ -16,13 +16,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Bot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="194">
-              <caret line="538" lean-forward="true" selection-start-line="538" selection-end-line="538" />
+            <state relative-caret-position="192">
+              <caret line="577" column="4" lean-forward="true" selection-start-line="577" selection-start-column="4" selection-end-line="577" selection-end-column="4" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
-                <marker date="1543256744719" expanded="true" signature="1395:1396" ph="..." />
-                <marker date="1543256744719" expanded="true" signature="14346:15609" ph="..." />
-                <marker date="1543256744719" expanded="true" signature="15620:15625" ph="..." />
+                <marker date="1543421328706" expanded="true" signature="1464:1465" ph="..." />
+                <marker date="1543421328706" expanded="true" signature="14523:15921" ph="..." />
               </folding>
             </state>
           </provider>
@@ -31,8 +30,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1632">
-              <caret line="101" selection-start-line="101" selection-end-line="102" selection-end-column="30" />
+            <state relative-caret-position="255">
+              <caret line="93" selection-start-line="93" selection-end-line="93" selection-end-column="15" />
               <folding>
                 <element signature="e#1#12#0" expanded="true" />
               </folding>
@@ -43,8 +42,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ScreenGrabber.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="15" selection-start-line="15" selection-end-line="15" />
+            <state relative-caret-position="187">
+              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -137,6 +136,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -148,7 +148,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -367,9 +366,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.ScreenGrabber" />
         <item itemvalue="Python.test" />
         <item itemvalue="Python.asd" />
-        <item itemvalue="Python.ScreenGrabber" />
       </list>
     </recent_temporary>
   </component>
@@ -628,26 +627,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1632">
-          <caret line="101" selection-start-line="101" selection-end-line="102" selection-end-column="30" />
-          <folding>
-            <element signature="e#1#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ScreenGrabber.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/codecs.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="106">
@@ -662,15 +641,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="93" selection-start-line="93" selection-end-line="93" selection-end-column="15" />
+          <folding>
+            <element signature="e#1#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ScreenGrabber.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Bot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="538" lean-forward="true" selection-start-line="538" selection-end-line="538" />
+        <state relative-caret-position="192">
+          <caret line="577" column="4" lean-forward="true" selection-start-line="577" selection-start-column="4" selection-end-line="577" selection-end-column="4" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
-            <marker date="1543256744719" expanded="true" signature="1395:1396" ph="..." />
-            <marker date="1543256744719" expanded="true" signature="14346:15609" ph="..." />
-            <marker date="1543256744719" expanded="true" signature="15620:15625" ph="..." />
+            <marker date="1543421328706" expanded="true" signature="1464:1465" ph="..." />
+            <marker date="1543421328706" expanded="true" signature="14523:15921" ph="..." />
           </folding>
         </state>
       </provider>

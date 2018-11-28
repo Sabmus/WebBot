@@ -1,8 +1,10 @@
 import time
 import os
 import pyautogui
+pyautogui.FAILSAFE = False  # disables the fail-safe
 import datetime
 import shutil
+import schedule
 from PIL import ImageGrab
 from numpy import *
 from selenium import webdriver
@@ -399,6 +401,12 @@ def tottus():
     browser.get(url_tottus)
 
     time.sleep(5)
+    # dropdown
+    left_click(932, 255)
+    time.sleep(0.25)
+    left_click(892, 268)
+    time.sleep(0.25)
+
     # Rut Empresa
     left_click(900, 276)
     time.sleep(0.25)
@@ -537,7 +545,7 @@ def wallmart():
     pyautogui.press('enter')
 
 
-def main():
+def job():
     smu()
     time.sleep(2)
     cenco()
@@ -546,6 +554,9 @@ def main():
     time.sleep(2)
     wallmart()
     time.sleep(2)
+
+
+def main():
     '''
     # pasar a TXT
     import csv
@@ -565,16 +576,16 @@ def main():
         print "I'm working...", t
         return
     
-    
+    '''
     #schedule.every(1).minutes.do(job)
     #schedule.every().hour.do(job)
-    schedule.every().day.at("01:00").do(job,'It is 01:00')
-    
+    schedule.every().day.at("14:15").do(job)
+
     while True:
         schedule.run_pending()
-        time.sleep(60) # wait one minute
-    CORRER CON: nohup python2.7 MyScheduledProgram.py &
-    '''
+        print(datetime.datetime.now())
+        time.sleep(2)  # wait one minute
+    #CORRER CON: nohup python2.7 MyScheduledProgram.py &
 
 
 if __name__ == '__main__':

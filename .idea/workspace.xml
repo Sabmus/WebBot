@@ -16,12 +16,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Bot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="577" column="4" lean-forward="true" selection-start-line="577" selection-start-column="4" selection-end-line="577" selection-end-column="4" />
+            <state relative-caret-position="243">
+              <caret line="608" lean-forward="true" selection-start-line="608" selection-end-line="608" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
-                <marker date="1543421328706" expanded="true" signature="1464:1465" ph="..." />
-                <marker date="1543421328706" expanded="true" signature="14523:15921" ph="..." />
+                <marker date="1543601649327" expanded="true" signature="1464:1465" ph="..." />
+                <marker date="1543601649327" expanded="true" signature="14530:16393" ph="..." />
               </folding>
             </state>
           </provider>
@@ -30,7 +30,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
+            <state relative-caret-position="1496">
               <caret line="93" selection-start-line="93" selection-end-line="93" selection-end-column="15" />
               <folding>
                 <element signature="e#1#12#0" expanded="true" />
@@ -42,8 +42,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ScreenGrabber.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+            <state relative-caret-position="255">
+              <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -136,7 +136,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -148,6 +147,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -446,7 +446,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.44517186" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.5270049" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4844517" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -643,7 +643,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
+        <state relative-caret-position="1496">
           <caret line="93" selection-start-line="93" selection-end-line="93" selection-end-column="15" />
           <folding>
             <element signature="e#1#12#0" expanded="true" />
@@ -653,8 +653,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ScreenGrabber.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        <state relative-caret-position="255">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
@@ -663,12 +663,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Bot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="577" column="4" lean-forward="true" selection-start-line="577" selection-start-column="4" selection-end-line="577" selection-end-column="4" />
+        <state relative-caret-position="243">
+          <caret line="608" lean-forward="true" selection-start-line="608" selection-end-line="608" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
-            <marker date="1543421328706" expanded="true" signature="1464:1465" ph="..." />
-            <marker date="1543421328706" expanded="true" signature="14523:15921" ph="..." />
+            <marker date="1543601649327" expanded="true" signature="1464:1465" ph="..." />
+            <marker date="1543601649327" expanded="true" signature="14530:16393" ph="..." />
           </folding>
         </state>
       </provider>

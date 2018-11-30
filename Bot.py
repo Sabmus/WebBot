@@ -174,17 +174,17 @@ def smu():
 
     time.sleep(4)
     left_click(735, 386)
-    time.sleep(0.1)
+    time.sleep(0.25)
     pyautogui.typewrite(user_smu, interval=0.05)
     left_click(735, 412)
-    time.sleep(0.1)
+    time.sleep(0.25)
     pyautogui.typewrite(pass_smu, interval=0.05)
     left_click(711, 440)
 
     # click para sacar primer pop-up
     time.sleep(12)
     left_click(1076, 132)
-    time.sleep(0.1)
+    time.sleep(0.25)
     # click en comercial
     left_click(455, 132)
     time.sleep(0.1)
@@ -402,10 +402,10 @@ def tottus():
 
     time.sleep(5)
     # dropdown
-    left_click(932, 255)
-    time.sleep(0.25)
-    left_click(892, 268)
-    time.sleep(0.25)
+    #left_click(932, 255)
+    #time.sleep(0.25)
+    #left_click(892, 268)
+    #time.sleep(0.25)
 
     # Rut Empresa
     left_click(900, 276)
@@ -546,14 +546,41 @@ def wallmart():
 
 
 def job():
-    smu()
-    time.sleep(2)
-    cenco()
-    time.sleep(2)
-    tottus()
-    time.sleep(2)
-    wallmart()
-    time.sleep(2)
+    print('corriendo SMU:')
+    try:
+        smu()
+        print('OK')
+    except:
+        time.sleep(2)
+        print('Falló')
+        pass
+
+    print('corriendo Cenco:')
+    try:
+        cenco()
+        print('OK')
+    except:
+        time.sleep(2)
+        print('Falló')
+        pass
+
+    print('corriendo Tottus:')
+    try:
+        tottus()
+        print('OK')
+    except:
+        time.sleep(2)
+        print('Falló')
+        pass
+
+    print('corriendo Wallmart:')
+    try:
+        wallmart()
+        print('OK')
+    except:
+        time.sleep(2)
+        print('Falló')
+        pass
 
 
 def main():
@@ -571,21 +598,22 @@ def main():
     https://github.com/dbader/schedule/blob/master/test_schedule.py
     import schedule
     import time
-    
+
+    schedule.every(1).minutes.do(job)
+    schedule.every().hour.do(job)
+
     def job(t):
         print "I'm working...", t
         return
-    
     '''
-    #schedule.every(1).minutes.do(job)
-    #schedule.every().hour.do(job)
-    schedule.every().day.at("14:15").do(job)
+
+    schedule.every().day.at("15:15").do(job)
 
     while True:
         schedule.run_pending()
         print(datetime.datetime.now())
+        left_click(692, 735)
         time.sleep(2)  # wait one minute
-    #CORRER CON: nohup python2.7 MyScheduledProgram.py &
 
 
 if __name__ == '__main__':

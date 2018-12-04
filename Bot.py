@@ -65,6 +65,9 @@ def screen_grab(box):
 
 
 def buscadia(coordenadas, ruta, cadena='none', dia='none'):
+    #if day_number <= 5:
+    #    day = 1
+    #else:
     if day_cod == 0:  # pregunta si es LUNES
         day = day_number - 4  # si es lunes buscar el Viernes
     else:
@@ -194,37 +197,39 @@ def smu():
     # click para sacar segundo pop-up
     left_click(1076, 132)
     time.sleep(0.1)
-    # calendario inicio
-    left_click(193, 507)
-    time.sleep(0.1)
 
-    for x in range(6):  # 6 líneas de cajas
-        for y in range(7):  # 7 cajas por línea
-            print(coord_x1, coord_y1, coord_x2, coord_y2)
-            linea = {str(cont): (coord_x1, coord_y1, coord_x2, coord_y2)}
-            calendar_coord_smu.update(linea)
-            cont += 1
-            if y % 2 == 0:
-                coord_x1 += 25
-                coord_x2 += 25
-            else:
-                coord_x1 += 24
-                coord_x2 += 24
-        coord_x1 = 195
-        coord_x2 = 212
-        coord_y1 += 23
-        coord_y2 += 23
+    if day_number > 5:
+        # calendario inicio
+        left_click(193, 507)
+        time.sleep(0.1)
 
-    x, y = buscadia(calendar_coord_smu, ruta_pix_smu)
-    left_click(x, y)
-    time.sleep(0.5)
+        for x in range(6):  # 6 líneas de cajas
+            for y in range(7):  # 7 cajas por línea
+                print(coord_x1, coord_y1, coord_x2, coord_y2)
+                linea = {str(cont): (coord_x1, coord_y1, coord_x2, coord_y2)}
+                calendar_coord_smu.update(linea)
+                cont += 1
+                if y % 2 == 0:
+                    coord_x1 += 25
+                    coord_x2 += 25
+                else:
+                    coord_x1 += 24
+                    coord_x2 += 24
+            coord_x1 = 195
+            coord_x2 = 212
+            coord_y1 += 23
+            coord_y2 += 23
+
+        x, y = buscadia(calendar_coord_smu, ruta_pix_smu)
+        left_click(x, y)
+        time.sleep(0.5)
 
     # generar informe
     left_click(423, 619)
-    time.sleep(8)
+    time.sleep(10)
     # descargar informe
     left_click(1163, 279)
-    time.sleep(1)
+    time.sleep(4)
     # CSV
     #left_click(606, 420)
     #time.sleep(2)
@@ -233,10 +238,10 @@ def smu():
     #time.sleep(2)
     # seleccionar
     left_click(683, 502)
-    time.sleep(2)
+    time.sleep(4)
     # boton guardar
     left_click(633, 500)
-    time.sleep(3)
+    time.sleep(7)
     # click en url del explorador de windows
     left_click(371, 47)
     time.sleep(0.25)
@@ -313,31 +318,33 @@ def cenco():
     # Click en ventas
     left_click(424, 152)
     time.sleep(10)
-    # Click en Calendario
-    left_click(240, 482)
-    time.sleep(0.25)
 
-    # coordenadas de cajas
-    for x in range(6):  # 6 líneas de cajas
-        for y in range(7):  # 7 cajas por línea
-            print(coord_x1, coord_y1, coord_x2, coord_y2)
-            linea = {str(cont): (coord_x1, coord_y1, coord_x2, coord_y2)}
-            calendar_coord_cenco.update(linea)
-            cont += 1
-            if y % 2 == 0:
-                coord_x1 += 25
-                coord_x2 += 25
-            else:
-                coord_x1 += 24
-                coord_x2 += 24
-        coord_x1 = 242
-        coord_x2 = 259
-        coord_y1 += 23
-        coord_y2 += 23
+    if day_number > 5:
+        # Click en Calendario
+        left_click(240, 482)
+        time.sleep(0.25)
 
-    x, y = buscadia(calendar_coord_cenco, ruta_pix_cenco)
-    left_click(x, y)
-    time.sleep(0.5)
+        # coordenadas de cajas
+        for x in range(6):  # 6 líneas de cajas
+            for y in range(7):  # 7 cajas por línea
+                print(coord_x1, coord_y1, coord_x2, coord_y2)
+                linea = {str(cont): (coord_x1, coord_y1, coord_x2, coord_y2)}
+                calendar_coord_cenco.update(linea)
+                cont += 1
+                if y % 2 == 0:
+                    coord_x1 += 25
+                    coord_x2 += 25
+                else:
+                    coord_x1 += 24
+                    coord_x2 += 24
+            coord_x1 = 242
+            coord_x2 = 259
+            coord_y1 += 23
+            coord_y2 += 23
+
+        x, y = buscadia(calendar_coord_cenco, ruta_pix_cenco)
+        left_click(x, y)
+        time.sleep(0.5)
 
     # generar informe
     left_click(422, 582)
@@ -410,15 +417,15 @@ def tottus():
     # Rut Empresa
     left_click(900, 276)
     time.sleep(0.25)
-    pyautogui.typewrite(rut_empresa, interval=0.15)
+    pyautogui.typewrite(rut_empresa, interval=0.2)
     # Uusario Tottus
     left_click(900, 309)
     time.sleep(0.25)
-    pyautogui.typewrite(user_tottus, interval=0.15)
+    pyautogui.typewrite(user_tottus, interval=0.2)
     # Password Tottus
     left_click(900, 341)
     time.sleep(0.25)
-    pyautogui.typewrite(pass_tottus, interval=0.15)
+    pyautogui.typewrite(pass_tottus, interval=0.2)
     # Ingresar
     left_click(925, 385)
     time.sleep(5)
@@ -550,36 +557,40 @@ def job():
     try:
         smu()
         print('OK')
-    except:
+    except Exception as e:
         time.sleep(2)
         print('Falló')
+        print(e)
         pass
 
     print('corriendo Cenco:')
     try:
         cenco()
         print('OK')
-    except:
+    except Exception as e:
         time.sleep(2)
         print('Falló')
+        print(e)
         pass
 
     print('corriendo Tottus:')
     try:
         tottus()
         print('OK')
-    except:
+    except Exception as e:
         time.sleep(2)
         print('Falló')
+        print(e)
         pass
 
     print('corriendo Wallmart:')
     try:
         wallmart()
         print('OK')
-    except:
+    except Exception as e:
         time.sleep(2)
         print('Falló')
+        print(e)
         pass
 
 
@@ -607,12 +618,14 @@ def main():
         return
     '''
 
-    schedule.every().day.at("15:15").do(job)
+    schedule.every().day.at("14:40").do(job)
 
     while True:
         schedule.run_pending()
         print(datetime.datetime.now())
-        left_click(692, 735)
+        pyautogui.dragTo(800, 735, duration=1)
+        pyautogui.dragTo(810, 735, duration=1)
+        #left_click(800, 735)
         time.sleep(2)  # wait one minute
 
 

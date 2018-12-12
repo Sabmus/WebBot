@@ -1,7 +1,6 @@
 import time
 import os
 import pyautogui
-pyautogui.FAILSAFE = False  # disables the fail-safe
 import datetime
 import shutil
 import schedule
@@ -11,6 +10,7 @@ from selenium import webdriver
 from pyunpack import Archive
 
 
+pyautogui.FAILSAFE = False  # disables the fail-safe
 # driver de INTERNET EXPLORER
 ie_driver = "C:\\Users\\smunoz\\Documents\\Python\\WebBot\\IEDriverServer.exe"
 chrome_driver = "C:\\Users\\smunoz\\Documents\\Python\\WebBot\\chromedriver.exe"
@@ -39,7 +39,7 @@ ruta_pix_tottus = 'mapeo_pix_tottus/'
 
 # datos Walmart
 user_wmt = 'Soc439a'
-pass_wmt = 'Vodkaskyy74'
+pass_wmt = 'Vodkaskyy75'
 url_wmt = 'https://rllogin.wal-mart.com/rl_security/rl_logon.aspx?ServerType=IIS1&CTAuthMode=BASIC&language=en&CT_ORIG_URL=%2F&ct_orig_uri=%2F'
 url_wmt_dl = 'https://retaillink.wal-mart.com'
 ruta_archivo_wallmart = 'C:\WebBot\Wallmart'
@@ -176,17 +176,17 @@ def smu():
     browser.get(url_smu)
 
     time.sleep(4)
-    left_click(735, 386)
+    left_click(1016, 449)
     time.sleep(0.25)
     pyautogui.typewrite(user_smu, interval=0.05)
-    left_click(735, 412)
+    left_click(1016, 473)
     time.sleep(0.25)
     pyautogui.typewrite(pass_smu, interval=0.05)
-    left_click(711, 440)
+    left_click(989, 503)
 
     # click para sacar primer pop-up
     time.sleep(12)
-    left_click(1076, 132)
+    left_click(1271, 447)
     time.sleep(0.25)
     # click en comercial
     left_click(455, 132)
@@ -195,7 +195,7 @@ def smu():
     left_click(523, 184)
     time.sleep(5)
     # click para sacar segundo pop-up
-    left_click(1076, 132)
+    left_click(1553, 132)
     time.sleep(0.1)
 
     if day_number > 5:
@@ -228,28 +228,28 @@ def smu():
     left_click(423, 619)
     time.sleep(10)
     # descargar informe
-    left_click(1163, 279)
+    left_click(1717, 279)
     time.sleep(4)
     # CSV
-    #left_click(606, 420)
+    #left_click(883, 576)
     #time.sleep(2)
     # Excel
-    #left_click(606, 463)
+    #left_click(883, 619)
     #time.sleep(2)
     # seleccionar
-    left_click(683, 502)
+    left_click(963, 658)
     time.sleep(4)
     # boton guardar
-    left_click(633, 500)
+    left_click(911, 655)
     time.sleep(7)
+
     # click en url del explorador de windows
-    left_click(371, 47)
+    left_click(646, 47)
     time.sleep(0.25)
     pyautogui.typewrite(ruta_archivo_smu, interval=0.01)
     pyautogui.press('enter')
-
     # click en nombre del explorador de windows
-    left_click(614, 342)
+    left_click(602, 438)
     time.sleep(0.25)
     pyautogui.typewrite('archivo_' + str(now.date()) + '.rar', interval=0.01)
     time.sleep(0.25)
@@ -260,9 +260,9 @@ def smu():
     #time.sleep(2)
     # cerrar
     time.sleep(1)
-    left_click(731, 500)
+    left_click(1012, 655)
     # cerrar sesión
-    left_click(1350, 132)
+    left_click(1904, 132)
     #extraigo el rar
     Archive(ruta_archivo_smu + '\\archivo_' + str(now.date()) + '.rar').extractall(ruta_archivo_smu)
 
@@ -281,29 +281,29 @@ def cenco():
 
     time.sleep(5)
     # seleccione país
-    left_click(771, 404)
+    left_click(1048, 406)
     time.sleep(0.25)
     # seleccione CHILE
-    left_click(601, 435)
+    left_click(892, 436)
     time.sleep(0.25)
     # seleccione UN
-    left_click(771, 465)
+    left_click(1048, 467)
     time.sleep(0.25)
     # seleccione Supermercados
-    left_click(625, 528)
+    left_click(953, 528)
     time.sleep(0.25)
     # Ingresar
-    left_click(681, 512)
+    left_click(961, 511)
     time.sleep(3)
 
     # Login User
-    left_click(712, 423)
+    left_click(1037, 423)
     time.sleep(0.25)
     pyautogui.typewrite(user_cenco, interval=0.01)
     #pyautogui.press('enter')
     time.sleep(0.25)
     # Login Paswword
-    left_click(712, 463)
+    left_click(1037, 463)
     time.sleep(0.25)
     pyautogui.typewrite(pass_cenco, interval=0.01)
     pyautogui.press('enter')
@@ -316,7 +316,7 @@ def cenco():
     left_click(424, 123)
     time.sleep(0.25)
     # Click en ventas
-    left_click(424, 152)
+    left_click(445, 153)
     time.sleep(10)
 
     if day_number > 5:
@@ -347,31 +347,31 @@ def cenco():
         time.sleep(0.5)
 
     # generar informe
-    left_click(422, 582)
+    left_click(426, 582)
     time.sleep(15)
     # descargar informe
-    left_click(1265, 294)
+    left_click(1819, 294)
     time.sleep(3)
     # CSV
-    # left_click(606, 420)
+    # left_click(883, 576)
     # time.sleep(2)
     # Excel
-    # left_click(606, 463)
+    # left_click(883, 619)
     # time.sleep(2)
     # seleccionar
-    left_click(683, 502)
+    left_click(962, 658)
     time.sleep(5)
     # boton guardar
-    left_click(633, 500)
+    left_click(911, 654)
     time.sleep(5)
 
     # click en url del explorador de windows
-    left_click(371, 47)
+    left_click(646, 47)
     time.sleep(0.25)
     pyautogui.typewrite(ruta_archivo_cenco, interval=0.01)
     pyautogui.press('enter')
     # click en nombre del explorador de windows
-    left_click(614, 342)
+    left_click(602, 438)
     pyautogui.typewrite('archivo_' + str(now.date()) + '.rar', interval=0.01)
     time.sleep(0.1)
     pyautogui.press('enter')
@@ -381,9 +381,9 @@ def cenco():
     # time.sleep(2)
     # cerrar
     time.sleep(0.25)
-    left_click(731, 500)
+    left_click(1012, 654)
     # cerrar sesión
-    left_click(1334, 124)
+    left_click(1888, 124)
     Archive(ruta_archivo_cenco + '\\archivo_' + str(now.date()) + '.rar').extractall(ruta_archivo_cenco)
 
 
@@ -415,28 +415,38 @@ def tottus():
     #time.sleep(0.25)
 
     # Rut Empresa
-    left_click(900, 276)
+    left_click(1236, 275)
     time.sleep(0.25)
     pyautogui.typewrite(rut_empresa, interval=0.2)
     # Uusario Tottus
-    left_click(900, 309)
+    left_click(1236, 308)
     time.sleep(0.25)
     pyautogui.typewrite(user_tottus, interval=0.2)
     # Password Tottus
-    left_click(900, 341)
+    left_click(1236, 340)
     time.sleep(0.25)
     pyautogui.typewrite(pass_tottus, interval=0.2)
     # Ingresar
-    left_click(925, 385)
+    left_click(1204, 385)
     time.sleep(5)
 
     # Ventas
+    pyautogui.moveTo(201, 149, duration=0.5)
+    pyautogui.mouseDown()
+    pyautogui.moveTo(209, 149, duration=0.5)
+    pyautogui.moveTo(209, 293, duration=0.5)
+    left_click(209, 293)
+    pyautogui.mouseUp()
+    time.sleep(10)
+
+    '''
     pyautogui.dragTo(159, 147, duration=1)
     pyautogui.moveTo(159, 293, duration=0.1)
     pyautogui.dragTo(169, 293, duration=0.5)
     time.sleep(0.25)
     left_click(230, 293)
     time.sleep(0.25)
+    '''
 
     if day_cod == 0:  # pregunta si es LUNES
         fecha = datetime.datetime.today() - datetime.timedelta(days=4)  # si es lunes buscar el Viernes
@@ -444,11 +454,11 @@ def tottus():
         fecha = datetime.datetime.today() - datetime.timedelta(days=2)  # sino, busca el día anterior
 
     # Click en Calendario_inicio
-    left_click(452, 287)
+    left_click(605, 288)
     time.sleep(0.25)
     pyautogui.typewrite(str(fecha.strftime("%d/%m/%Y")), interval=0.15)
 
-    left_click(1033, 287)
+    left_click(1427, 289)
     time.sleep(0.25)
     hoy = datetime.datetime.today()
     pyautogui.typewrite(str(hoy.strftime("%d/%m/%Y")), interval=0.15)
@@ -498,19 +508,19 @@ def tottus():
     time.sleep(0.5)
     '''
     # check box
-    left_click(403, 309)
+    left_click(561, 309)
     time.sleep(0.25)
     # generar informe
-    left_click(682, 338)
+    left_click(964, 338)
     time.sleep(10)
     # descargar informe
-    left_click(985, 703)
+    left_click(1265, 1018)
     time.sleep(10)
     #mueve el archivo
     shutil.move('C:/Users/smunoz/Downloads/datos.csv', 'C:/WebBot/Tottus/datos.csv')
     # cerrar
     time.sleep(0.25)
-    left_click(882, 111)
+    left_click(1397, 111)
 
 
 def wallmart():
@@ -529,6 +539,7 @@ def wallmart():
     print('print containers:\n\n ')
     print(containers)
     print('\n\n')
+    url = ''
     for item in containers:
         print(item.get_attribute('id'))
         if 'Sell Out Walmart VSR (Bot Planeamiento-No Borrar)' in item.get_attribute('id'):
@@ -541,12 +552,13 @@ def wallmart():
     pyautogui.hotkey('ctrl', 's')
 
     # click en url del explorador de windows
-    left_click(371, 47)
+    left_click(646, 47)
     time.sleep(0.25)
     pyautogui.typewrite(ruta_archivo_wallmart, interval=0.01)
     pyautogui.press('enter')
+    time.sleep(0.25)
     # click en nombre del explorador de windows
-    left_click(614, 342)
+    left_click(602, 438)
     pyautogui.typewrite('archivo_' + str(now.date()) + '.txt', interval=0.01)
     time.sleep(0.1)
     pyautogui.press('enter')
@@ -618,13 +630,13 @@ def main():
         return
     '''
 
-    schedule.every().day.at("14:40").do(job)
+    schedule.every().day.at("12:52").do(job)
 
     while True:
         schedule.run_pending()
         print(datetime.datetime.now())
-        pyautogui.dragTo(800, 735, duration=1)
-        pyautogui.dragTo(810, 735, duration=1)
+        #pyautogui.dragTo(800, 735, duration=1)
+        #pyautogui.dragTo(810, 735, duration=1)
         #left_click(800, 735)
         time.sleep(2)  # wait one minute
 

@@ -5,6 +5,7 @@ import pyautogui
 import datetime
 from PIL import ImageGrab
 from numpy import *
+import csv
 
 '''
 def leftClick(x, y):
@@ -90,27 +91,29 @@ print(paso2)
 print('\n\n\n')
 
 
-
-import schedule
-import time
-import datetime
-
-def job():
-    print("I'm working... " + str(datetime.datetime.now()))
-
-
-#schedule.every(1).minutes.do(job)
-#schedule.every().hour.do(job)
-schedule.every().day.at("12:58").do(job)
-
-while 1:
-    schedule.run_pending()
-    time.sleep(1)
+archivo = "C:\WebBot\SMU\Ventas(Producto)_13-12-2018_170909.csv"
+texto = "C:\WebBot\SMU\Ventas(Producto)_13-12-2018_170909.txt"
+import codecs
+try:
+    with codecs.open(archivo, 'rU', 'utf-8') as csvfile:
+        spamreader = csv.reader(csvfile)
+        for row in spamreader:
+            print(','.join(row))
+except Exception as e:
+    print(e)
+    pass
 
 
 
-
-
+'''
+import os
+ruta_archivo_smu = 'C:\WebBot\Cenco'
+file_path = 'C:\WebBot\Cenco'
+for file in os.listdir(file_path):
+    if file.endswith(".csv"):
+        print('a')
+        print(os.path.join(file_path, file))
+'''
 
 '''
 import shutil

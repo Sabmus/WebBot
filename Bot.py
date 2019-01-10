@@ -20,22 +20,22 @@ chrome_driver = "C:\\Users\\smunoz\\Documents\\Python\\WebBot\\chromedriver.exe"
 user_smu = '17596472-K'
 pass_smu = 'Rita2018'
 url_smu = 'https://b2b.smu.cl//Supermercados/BBRe-commerce/access/login.do'
-ruta_archivo_smu = 'C:\WebBot\SMU'
+ruta_archivo_smu = 'M:\WebBot\SMU'
 ruta_pix_smu = 'mapeo_pix_smu/'
 
 # datos Cencosud
 user_cenco = '166076633'
 pass_cenco = 'Rita2033'
 url_cenco = 'https://www.cenconlineb2b.com/'
-ruta_archivo_cenco = 'C:\WebBot\Cenco'
+ruta_archivo_cenco = 'M:\WebBot\Cenco'
 ruta_pix_cenco = 'mapeo_pix_cenco/'
 
 # datos Tottus
 rut_empresa = '86547900k'
 user_tottus = '166076633'
-pass_tottus = 'Rita2025'
+pass_tottus = 'Rita2033'
 url_tottus = 'https://b2b.tottus.com/b2btoclpr/grafica/html/index.html'
-ruta_archivo_tottus = 'C:\WebBot\Tottus'
+ruta_archivo_tottus = 'M:\WebBot\Tottus'
 ruta_pix_tottus = 'mapeo_pix_tottus/'
 
 # datos Walmart
@@ -43,7 +43,7 @@ user_wmt = 'Soc439a'
 pass_wmt = 'Vodkaskyy75'
 url_wmt = 'https://rllogin.wal-mart.com/rl_security/rl_logon.aspx?ServerType=IIS1&CTAuthMode=BASIC&language=en&CT_ORIG_URL=%2F&ct_orig_uri=%2F'
 url_wmt_dl = 'https://retaillink.wal-mart.com'
-ruta_archivo_wallmart = 'C:\WebBot\Wallmart'
+ruta_archivo_wallmart = 'M:\WebBot\Wallmart'
 
 now = datetime.datetime.now()
 day_number = now.day
@@ -176,7 +176,7 @@ def smu():
     browser = webdriver.Ie(ie_driver)
     browser.get(url_smu)
 
-    time.sleep(15)
+    time.sleep(20)
     left_click(1016, 449)
     time.sleep(0.25)
     pyautogui.typewrite(user_smu, interval=0.2)
@@ -186,18 +186,18 @@ def smu():
     left_click(989, 503)
 
     # click para sacar primer pop-up
-    time.sleep(12)
+    time.sleep(20)
     left_click(1271, 447)
-    time.sleep(0.25)
+    time.sleep(5)
     # click en comercial
     left_click(455, 132)
-    time.sleep(0.1)
+    time.sleep(5)
     # click en informe de ventas
     left_click(523, 184)
-    time.sleep(5)
+    time.sleep(20)
     # click para sacar segundo pop-up
     left_click(1553, 132)
-    time.sleep(0.1)
+    time.sleep(5)
 
     if day_number > 5:
         # calendario inicio
@@ -227,15 +227,15 @@ def smu():
 
     # generar informe
     left_click(423, 619)
-    time.sleep(10)
+    time.sleep(20)
     # descargar informe
     #left_click(1717, 279)
     #time.sleep(4)
 
     left_click(1751, 279)
-    time.sleep(4)
+    time.sleep(20)
     left_click(893, 725)
-    time.sleep(4)
+    time.sleep(20)
 
     # CSV
     #left_click(883, 576)
@@ -248,7 +248,7 @@ def smu():
     #time.sleep(4)
     # boton guardar
     left_click(911, 655)
-    time.sleep(7)
+    time.sleep(20)
 
     # click en url del explorador de windows
     left_click(646, 47)
@@ -266,13 +266,17 @@ def smu():
     #left_click(513, 447)
     #time.sleep(2)
     # cerrar
-    time.sleep(1)
+    time.sleep(20)
     left_click(1012, 655)
     # cerrar sesión
+    time.sleep(0.5)
     left_click(1904, 132)
+
     #extraigo el rar
-    nombre_archivo = ruta_archivo_smu + '\\archivo_' + str(now.date())
-    Archive(nombre_archivo + '.rar').extractall(ruta_archivo_smu)
+    Archive(ruta_archivo_smu + '\\archivo_' + str(now.date()) + '.rar').extractall(ruta_archivo_smu)
+    for file in os.listdir(ruta_archivo_smu):
+        if file.endswith(".csv"):
+            os.rename(os.path.join(ruta_archivo_smu, file), os.path.join(ruta_archivo_smu, 'datos.csv'))
 
     '''texto = nombre_archivo + '.txt'
     for file in os.listdir(ruta_archivo_smu):
@@ -407,11 +411,16 @@ def cenco():
     # left_click(513, 447)
     # time.sleep(2)
     # cerrar
-    time.sleep(0.25)
+    time.sleep(0.5)
     left_click(1012, 654)
     # cerrar sesión
+    time.sleep(0.5)
     left_click(1888, 124)
+
     Archive(ruta_archivo_cenco + '\\archivo_' + str(now.date()) + '.rar').extractall(ruta_archivo_cenco)
+    for file in os.listdir(ruta_archivo_cenco):
+        if file.endswith(".csv"):
+            os.rename(os.path.join(ruta_archivo_cenco, file), os.path.join(ruta_archivo_cenco, 'datos.csv'))
 
 
 def tottus():
@@ -436,10 +445,16 @@ def tottus():
 
     time.sleep(5)
     # dropdown
-    #left_click(932, 255)
-    #time.sleep(0.25)
-    #left_click(892, 268)
-    #time.sleep(0.25)
+    left_click(1210, 255)
+    time.sleep(0.25)
+    left_click(1210, 242)
+    time.sleep(0.25)
+    left_click(1024, 602)
+    time.sleep(0.25)
+    left_click(1210, 255)
+    time.sleep(0.25)
+    left_click(1210, 269)
+    time.sleep(0.25)
 
     # Rut Empresa
     pyautogui.doubleClick(1236, 275)
@@ -466,74 +481,24 @@ def tottus():
     pyautogui.mouseUp()
     time.sleep(10)
 
-    '''
-    pyautogui.dragTo(159, 147, duration=1)
-    pyautogui.moveTo(159, 293, duration=0.1)
-    pyautogui.dragTo(169, 293, duration=0.5)
-    time.sleep(0.25)
-    left_click(230, 293)
-    time.sleep(0.25)
-    '''
-
     if day_cod == 0:  # pregunta si es LUNES
         fecha = datetime.datetime.today() - datetime.timedelta(days=4)  # si es lunes buscar el Viernes
     else:
         fecha = datetime.datetime.today() - datetime.timedelta(days=2)  # sino, busca el día anterior
 
+    hoy = datetime.datetime.today() - datetime.timedelta(days=1)
+    time.sleep(1)
     # Click en Calendario_inicio
     left_click(605, 288)
-    time.sleep(0.25)
-    pyautogui.typewrite(str(fecha.strftime("%d/%m/%Y")), interval=0.2)
+    time.sleep(0.5)
+    pyautogui.typewrite(str(hoy.strftime("%d/%m/%Y")), interval=0.2)
+    #pyautogui.typewrite(str(fecha.strftime("%d/%m/%Y")), interval=0.2)
 
     left_click(1427, 289)
-    time.sleep(0.25)
-    hoy = datetime.datetime.today()
+    time.sleep(0.5)
+    #hoy = datetime.datetime.today()
     pyautogui.typewrite(str(hoy.strftime("%d/%m/%Y")), interval=0.2)
 
-    '''
-    # Click en Calendario_inicio
-    left_click(473, 284)
-    time.sleep(0.25)
-    
-    # coordenadas de cajas
-    for x in range(6):  # 6 líneas de cajas
-        for y in range(7):  # 7 cajas por línea
-            print(coord_ini_x1, coord_ini_y1, coord_ini_x2, coord_ini_y2)
-            linea = {str(cont_ini): (coord_ini_x1, coord_ini_y1, coord_ini_x2, coord_ini_y2)}
-            calendar_coord_tottus_inicio.update(linea)
-            cont_ini += 1
-            coord_ini_x1 += 28
-            coord_ini_x2 += 28
-        coord_ini_x1 = 476
-        coord_ini_x2 = 493
-        coord_ini_y1 += 17
-        coord_ini_y2 += 17
-
-    x, y = buscadia(calendar_coord_tottus_inicio, ruta_pix_tottus, cadena="tottus")
-    left_click(x, y)
-    time.sleep(0.5)
-    
-    # Click en Calendario_fin
-    left_click(1056, 283)
-    time.sleep(0.25)
-    # coordenadas de cajas
-    for x in range(6):  # 6 líneas de cajas
-        for y in range(7):  # 7 cajas por línea
-            print(coord_fin_x1, coord_fin_y1, coord_fin_x2, coord_fin_y2)
-            linea = {str(cont_fin): (coord_fin_x1, coord_fin_y1, coord_fin_x2, coord_fin_y2)}
-            calendar_coord_tottus_fin.update(linea)
-            cont_fin += 1
-            coord_fin_x1 += 28
-            coord_fin_x2 += 28
-        coord_fin_x1 = 1059
-        coord_fin_x2 = 1076
-        coord_fin_y1 += 17
-        coord_fin_y2 += 17
-
-    x, y = buscadia(calendar_coord_tottus_fin, ruta_pix_tottus, cadena='tottus', dia='hoy')
-    left_click(x, y)
-    time.sleep(0.5)
-    '''
     # check box
     left_click(561, 309)
     time.sleep(0.25)
@@ -544,7 +509,7 @@ def tottus():
     left_click(1265, 1018)
     time.sleep(10)
     #mueve el archivo
-    shutil.move('C:/Users/smunoz/Downloads/datos.csv', 'C:/WebBot/Tottus/datos.csv')
+    shutil.move('C:/Users/smunoz/Downloads/datos.csv', os.path.join(ruta_archivo_tottus, 'datos.csv'))
     # cerrar
     time.sleep(0.25)
     left_click(1397, 111)
@@ -586,7 +551,8 @@ def wallmart():
     time.sleep(0.25)
     # click en nombre del explorador de windows
     left_click(602, 438)
-    pyautogui.typewrite('archivo_' + str(now.date()) + '.txt', interval=0.2)
+    # pyautogui.typewrite('archivo_' + str(now.date()) + '.txt', interval=0.2)
+    pyautogui.typewrite('datos.txt', interval=0.2)
     time.sleep(0.1)
     pyautogui.press('enter')
 
@@ -601,10 +567,10 @@ def job():
         print('Falló')
         print(e)
         pass
-    
+
     print('corriendo SMU:')
     try:
-        smu()
+        #smu()
         print('OK')
     except Exception as e:
         time.sleep(2)
@@ -614,7 +580,7 @@ def job():
 
     print('corriendo Cenco:')
     try:
-        cenco()
+        #cenco()
         print('OK')
     except Exception as e:
         time.sleep(2)
@@ -624,7 +590,7 @@ def job():
 
     print('corriendo Tottus:')
     try:
-        tottus()
+        #tottus()
         print('OK')
     except Exception as e:
         time.sleep(2)
@@ -657,7 +623,7 @@ def main():
         return
     '''
 
-    schedule.every().day.at("09:17").do(job)
+    schedule.every().day.at("16:31").do(job)
 
     while True:
         schedule.run_pending()

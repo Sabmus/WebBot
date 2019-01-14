@@ -557,10 +557,48 @@ def wallmart():
     pyautogui.press('enter')
 
 
+def elimina_archivos():
+    try:
+        os.remove(path=ruta_archivo_wallmart + '\datos.txt')
+    except Exception as e:
+        print(e)
+        pass
+
+    try:
+        os.remove(path=ruta_archivo_smu + '\datos.csv')
+    except Exception as e:
+        print(e)
+        pass
+
+    try:
+        os.remove(path=ruta_archivo_smu + '\\archivo_' + str(now.date()) + '.rar')
+    except Exception as e:
+        print(e)
+        pass
+
+    try:
+        os.remove(path=ruta_archivo_cenco + '\datos.csv')
+    except Exception as e:
+        print(e)
+        pass
+
+    try:
+        os.remove(path=ruta_archivo_cenco + '\\archivo_' + str(now.date()) + '.rar')
+    except Exception as e:
+        print(e)
+        pass
+
+    try:
+        os.remove(path=ruta_archivo_tottus + '\datos.csv')
+    except Exception as e:
+        print(e)
+        pass
+
+
 def job():
     print('corriendo Wallmart:')
     try:
-        wallmart()
+        #wallmart()
         print('OK')
     except Exception as e:
         time.sleep(2)
@@ -599,6 +637,18 @@ def job():
         pass
 
 
+def job2():
+    print('Eliminando archivos:')
+    try:
+        elimina_archivos()
+        print('OK')
+    except Exception as e:
+        time.sleep(2)
+        print('Falló')
+        print(e)
+        pass
+
+
 def main():
     '''
     # pasar a TXT
@@ -623,7 +673,8 @@ def main():
         return
     '''
 
-    schedule.every().day.at("16:31").do(job)
+    schedule.every().day.at("06:00").do(job)
+    schedule.every().day.at("07:00").do(job2)
 
     while True:
         schedule.run_pending()

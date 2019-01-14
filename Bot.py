@@ -5,11 +5,13 @@ import datetime
 import shutil
 import schedule
 import csv
+#import pyodbc
 from PIL import ImageGrab
 from numpy import *
 from selenium import webdriver
 from pyunpack import Archive
 
+#conn = pyodbc.connect('DRIVER={SQL Server};SERVER=vsr-sqlbi;DATABASE=B2B;UID=B2B_Log_User;PWD=LUE$%2019')
 
 pyautogui.FAILSAFE = False  # disables the fail-safe
 # driver de INTERNET EXPLORER
@@ -562,6 +564,11 @@ def elimina_archivos():
         os.remove(path=ruta_archivo_wallmart + '\datos.txt')
     except Exception as e:
         print(e)
+        #cursor = conn.cursor()
+        #currenttime = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
+        #cursor.execute("insert into B2B..ErrorLog_Bot_B2B values (?, 'test')", currenttime)
+        #cursor.execute("insert into B2B..ErrorLog_Bot_B2B values ('" + str(now) + "','" + str('hola') + "')")
+        #cursor.close()
         pass
 
     try:
@@ -598,7 +605,7 @@ def elimina_archivos():
 def job():
     print('corriendo Wallmart:')
     try:
-        #wallmart()
+        wallmart()
         print('OK')
     except Exception as e:
         time.sleep(2)
@@ -608,7 +615,7 @@ def job():
 
     print('corriendo SMU:')
     try:
-        #smu()
+        smu()
         print('OK')
     except Exception as e:
         time.sleep(2)
@@ -618,7 +625,7 @@ def job():
 
     print('corriendo Cenco:')
     try:
-        #cenco()
+        cenco()
         print('OK')
     except Exception as e:
         time.sleep(2)
@@ -628,7 +635,7 @@ def job():
 
     print('corriendo Tottus:')
     try:
-        #tottus()
+        tottus()
         print('OK')
     except Exception as e:
         time.sleep(2)

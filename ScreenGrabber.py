@@ -11,7 +11,7 @@ def screenGrab():
 
 
 def main():
-    time.sleep(2)
+    time.sleep(3)
     screenGrab()
 
 

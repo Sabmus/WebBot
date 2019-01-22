@@ -42,7 +42,7 @@ ruta_pix_tottus = 'mapeo_pix_tottus/'
 
 # datos Walmart
 user_wmt = 'Soc439a'
-pass_wmt = 'Vodkaskyy75'
+pass_wmt = 'Vodkaskyy76'
 url_wmt = 'https://rllogin.wal-mart.com/rl_security/rl_logon.aspx?ServerType=IIS1&CTAuthMode=BASIC&language=en&CT_ORIG_URL=%2F&ct_orig_uri=%2F'
 url_wmt_dl = 'https://retaillink.wal-mart.com'
 ruta_archivo_wallmart = 'M:\WebBot\Wallmart'
@@ -72,9 +72,9 @@ def buscadia(coordenadas, ruta, cadena='none', dia='none'):
     #    day = 1
     #else:
     if day_cod == 0:  # pregunta si es LUNES
-        day = day_number - 4  # si es lunes buscar el Viernes
+        day = day_number - 5  # si es lunes buscar el Viernes
     else:
-        day = day_number - 2  # sino, busca el día anterior
+        day = day_number - 4  # sino, busca el día anterior
         print('dia buscado: ', day)
 
     if dia == 'hoy':
@@ -167,6 +167,19 @@ def buscadia(coordenadas, ruta, cadena='none', dia='none'):
 
 
 def smu():
+    #inicio
+    coord_x1_ini_tot = 987
+    coord_y1_ini_tot = 662
+    coord_x2_ini_tot = 1004
+    coord_y2_ini_tot = 675
+
+    '''
+    #fin
+    coord_x1 = 1203
+    coord_y1 = 662
+    coord_x2 = 1220
+    coord_y2 = 675
+    '''
     coord_x1 = 195
     coord_y1 = 556
     coord_x2 = 212
@@ -182,9 +195,11 @@ def smu():
     left_click(1016, 449)
     time.sleep(0.25)
     pyautogui.typewrite(user_smu, interval=0.2)
+    time.sleep(0.25)
     left_click(1016, 473)
     time.sleep(0.25)
     pyautogui.typewrite(pass_smu, interval=0.2)
+    time.sleep(0.25)
     left_click(989, 503)
 
     # click para sacar primer pop-up
@@ -234,8 +249,38 @@ def smu():
     #left_click(1717, 279)
     #time.sleep(4)
 
+    #click en descargar total (icono azul)
     left_click(1751, 279)
     time.sleep(20)
+
+    cont = 1
+    calendar_coord_smu = {}
+    # calendario inicio
+    left_click(985, 613)
+    time.sleep(0.2)
+
+    for x in range(6):  # 6 líneas de cajas
+        for y in range(7):  # 7 cajas por línea
+            print(coord_x1_ini_tot, coord_y1_ini_tot, coord_x2_ini_tot, coord_y2_ini_tot)
+            linea = {str(cont): (coord_x1_ini_tot, coord_y1_ini_tot, coord_x2_ini_tot, coord_y2_ini_tot)}
+            calendar_coord_smu.update(linea)
+            cont += 1
+            if y % 2 == 0:
+                coord_x1_ini_tot += 25
+                coord_x2_ini_tot += 25
+            else:
+                coord_x1_ini_tot += 24
+                coord_x2_ini_tot += 24
+        coord_x1_ini_tot = 987
+        coord_x2_ini_tot = 1004
+        coord_y1_ini_tot += 23
+        coord_y2_ini_tot += 23
+
+    x, y = buscadia(calendar_coord_smu, ruta_pix_smu)
+    left_click(x, y)
+    time.sleep(0.5)
+
+
     left_click(893, 725)
     time.sleep(20)
 
@@ -681,7 +726,7 @@ def main():
     '''
 
     schedule.every().day.at("06:00").do(job)
-    schedule.every().day.at("07:00").do(job2)
+    #schedule.every().day.at("10:00").do(job2)
 
     while True:
         schedule.run_pending()

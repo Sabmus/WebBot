@@ -12,15 +12,16 @@ from selenium import webdriver
 from pyunpack import Archive
 
 #conn = pyodbc.connect('DRIVER={SQL Server};SERVER=vsr-sqlbi;DATABASE=B2B;UID=B2B_Log_User;PWD=LUE$%2019')
+ruta_descarga = 'C:\\Users\\smunoz\\Downloads'
 
-pyautogui.FAILSAFE = False  # disables the fail-safe
+pyautogui.FAILSAFE = False  # disables the fail-safe, evita que el mouse se vaya a la esquina superior izquierda al estar el pc inactivo
 # driver de INTERNET EXPLORER
 ie_driver = "C:\\Users\\smunoz\\Documents\\Python\\WebBot\\IEDriverServer.exe"
 chrome_driver = "C:\\Users\\smunoz\\Documents\\Python\\WebBot\\chromedriver.exe"
 
 # datos SMU
 user_smu = '17596472-K'
-pass_smu = 'Rita2018'
+pass_smu = 'Rita2020'
 url_smu = 'https://b2b.smu.cl//Supermercados/BBRe-commerce/access/login.do'
 ruta_archivo_smu = 'M:\WebBot\SMU'
 ruta_pix_smu = 'mapeo_pix_smu/'
@@ -57,7 +58,6 @@ print(day_cod)
 
 def left_click(x, y):
     pyautogui.click(x, y)
-    time.sleep(1)
 
 
 # recibe box=(x1, y1, x2, y2)
@@ -193,9 +193,11 @@ def smu():
 
     time.sleep(20)
     left_click(1016, 449)
+    left_click(1016, 449)
     time.sleep(0.25)
     pyautogui.typewrite(user_smu, interval=0.2)
     time.sleep(0.25)
+    left_click(1016, 473)
     left_click(1016, 473)
     time.sleep(0.25)
     pyautogui.typewrite(pass_smu, interval=0.2)
@@ -204,7 +206,8 @@ def smu():
 
     # click para sacar primer pop-up
     time.sleep(20)
-    left_click(1271, 447)
+    #left_click(1271, 447)
+    left_click(1553, 132)
     time.sleep(5)
     # click en comercial
     left_click(455, 132)
@@ -212,6 +215,7 @@ def smu():
     # click en informe de ventas
     left_click(523, 184)
     time.sleep(20)
+
     # click para sacar segundo pop-up
     left_click(1553, 132)
     time.sleep(5)
@@ -253,33 +257,33 @@ def smu():
     left_click(1751, 279)
     time.sleep(20)
 
-    cont = 1
-    calendar_coord_smu = {}
-    # calendario inicio
-    left_click(985, 613)
-    time.sleep(0.2)
+    if day_number > 5:
+        cont = 1
+        calendar_coord_smu = {}
+        # calendario inicio
+        left_click(985, 613)
+        time.sleep(0.2)
 
-    for x in range(6):  # 6 líneas de cajas
-        for y in range(7):  # 7 cajas por línea
-            print(coord_x1_ini_tot, coord_y1_ini_tot, coord_x2_ini_tot, coord_y2_ini_tot)
-            linea = {str(cont): (coord_x1_ini_tot, coord_y1_ini_tot, coord_x2_ini_tot, coord_y2_ini_tot)}
-            calendar_coord_smu.update(linea)
-            cont += 1
-            if y % 2 == 0:
-                coord_x1_ini_tot += 25
-                coord_x2_ini_tot += 25
-            else:
-                coord_x1_ini_tot += 24
-                coord_x2_ini_tot += 24
-        coord_x1_ini_tot = 987
-        coord_x2_ini_tot = 1004
-        coord_y1_ini_tot += 23
-        coord_y2_ini_tot += 23
+        for x in range(6):  # 6 líneas de cajas
+            for y in range(7):  # 7 cajas por línea
+                print(coord_x1_ini_tot, coord_y1_ini_tot, coord_x2_ini_tot, coord_y2_ini_tot)
+                linea = {str(cont): (coord_x1_ini_tot, coord_y1_ini_tot, coord_x2_ini_tot, coord_y2_ini_tot)}
+                calendar_coord_smu.update(linea)
+                cont += 1
+                if y % 2 == 0:
+                    coord_x1_ini_tot += 25
+                    coord_x2_ini_tot += 25
+                else:
+                    coord_x1_ini_tot += 24
+                    coord_x2_ini_tot += 24
+            coord_x1_ini_tot = 987
+            coord_x2_ini_tot = 1004
+            coord_y1_ini_tot += 23
+            coord_y2_ini_tot += 23
 
-    x, y = buscadia(calendar_coord_smu, ruta_pix_smu)
-    left_click(x, y)
-    time.sleep(0.5)
-
+        x, y = buscadia(calendar_coord_smu, ruta_pix_smu)
+        left_click(x, y)
+        time.sleep(0.5)
 
     left_click(893, 725)
     time.sleep(20)
@@ -394,7 +398,7 @@ def cenco():
     if day_number > 5:
         # Click en Calendario
         left_click(240, 482)
-        time.sleep(0.25)
+        time.sleep(0.5)
 
         # coordenadas de cajas
         for x in range(6):  # 6 líneas de cajas
@@ -416,7 +420,7 @@ def cenco():
 
         x, y = buscadia(calendar_coord_cenco, ruta_pix_cenco)
         left_click(x, y)
-        time.sleep(0.5)
+        time.sleep(2)
 
     # generar informe
     left_click(426, 582)
@@ -458,10 +462,10 @@ def cenco():
     # left_click(513, 447)
     # time.sleep(2)
     # cerrar
-    time.sleep(0.5)
+    time.sleep(5)
     left_click(1012, 654)
     # cerrar sesión
-    time.sleep(0.5)
+    time.sleep(1)
     left_click(1888, 124)
 
     Archive(ruta_archivo_cenco + '\\archivo_' + str(now.date()) + '.rar').extractall(ruta_archivo_cenco)
@@ -587,9 +591,17 @@ def wallmart():
             break
 
     browser.get(url)
-    time.sleep(30)
-    pyautogui.hotkey('ctrl', 's')
+    time.sleep(90)
+    #pyautogui.hotkey('ctrl', 's')
 
+    for file in os.listdir(ruta_descarga):
+        if file.endswith(".txt"):
+            os.rename(os.path.join(ruta_descarga, file), os.path.join(ruta_descarga, 'datos.txt'))
+
+    # mueve el archivo
+    shutil.move(ruta_descarga + '\datos.txt', os.path.join(ruta_archivo_wallmart, 'datos.txt'))
+
+    '''
     # click en url del explorador de windows
     left_click(646, 47)
     time.sleep(0.25)
@@ -602,6 +614,7 @@ def wallmart():
     pyautogui.typewrite('datos.txt', interval=0.2)
     time.sleep(0.1)
     pyautogui.press('enter')
+    '''
 
 
 def elimina_archivos():
@@ -711,7 +724,7 @@ def main():
         with open(csv_file, "r") as my_input_file:
             [my_output_file.write(" ".join(row) + '\n') for row in csv.reader(my_input_file)]
         my_output_file.close()
-    
+
     # scheduler
     https://github.com/dbader/schedule/blob/master/test_schedule.py
     import schedule

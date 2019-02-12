@@ -19,6 +19,9 @@ pyautogui.FAILSAFE = False  # disables the fail-safe, evita que el mouse se vaya
 ie_driver = "C:\\Users\\smunoz\\Documents\\Python\\WebBot\\IEDriverServer.exe"
 chrome_driver = "C:\\Users\\smunoz\\Documents\\Python\\WebBot\\chromedriver.exe"
 
+
+## PARAMETROS CONFIGURABLES ##
+# MODIFICAR SOLO LO ESCRITO EN EL MANUAL #
 # datos SMU
 user_smu = '17596472-K'
 pass_smu = 'Rita2020'
@@ -36,7 +39,7 @@ ruta_pix_cenco = 'mapeo_pix_cenco/'
 # datos Tottus
 rut_empresa = '86547900k'
 user_tottus = '166076633'
-pass_tottus = 'Rita2033'
+pass_tottus = 'Rita2034'
 url_tottus = 'https://b2b.tottus.com/b2btoclpr/grafica/html/index.html'
 ruta_archivo_tottus = 'M:\WebBot\Tottus'
 ruta_pix_tottus = 'mapeo_pix_tottus/'
@@ -47,6 +50,9 @@ pass_wmt = 'Vodkaskyy76'
 url_wmt = 'https://rllogin.wal-mart.com/rl_security/rl_logon.aspx?ServerType=IIS1&CTAuthMode=BASIC&language=en&CT_ORIG_URL=%2F&ct_orig_uri=%2F'
 url_wmt_dl = 'https://retaillink.wal-mart.com'
 ruta_archivo_wallmart = 'M:\WebBot\Wallmart'
+
+
+
 
 now = datetime.datetime.now()
 day_number = now.day

@@ -20,6 +20,7 @@ ie_driver = "C:\\Users\\smunoz\\Documents\\Python\\WebBot\\IEDriverServer.exe"
 chrome_driver = "C:\\Users\\smunoz\\Documents\\Python\\WebBot\\chromedriver.exe"
 
 
+
 ## PARAMETROS CONFIGURABLES ##
 # MODIFICAR SOLO LO ESCRITO EN EL MANUAL #
 # datos SMU
@@ -50,7 +51,6 @@ pass_wmt = 'Vodkaskyy76'
 url_wmt = 'https://rllogin.wal-mart.com/rl_security/rl_logon.aspx?ServerType=IIS1&CTAuthMode=BASIC&language=en&CT_ORIG_URL=%2F&ct_orig_uri=%2F'
 url_wmt_dl = 'https://retaillink.wal-mart.com'
 ruta_archivo_wallmart = 'M:\WebBot\Wallmart'
-
 
 
 
@@ -593,11 +593,32 @@ def wallmart():
         print(item.get_attribute('id'))
         if 'Sell Out Walmart VSR (Bot Planeamiento-No Borrar)' in item.get_attribute('id'):
             url = url_wmt_dl + item.get_attribute('id')
+            print('URL NORMAL')
+            print('url: ' + url)
+            break
+        if 'Sell Out Walmart VSR (Bot Planeamiento-No Borrar) intento 2' in item.get_attribute('id'):
+            url = url_wmt_dl + item.get_attribute('id')
+            print('URL BACKUP 2')
+            print('url: ' + url)
+            break
+        if 'Sell Out Walmart VSR (Bot Planeamiento-No Borrar) intento 3' in item.get_attribute('id'):
+            url = url_wmt_dl + item.get_attribute('id')
+            print('URL BACKUP 3')
+            print('url: ' + url)
+            break
+        if 'Sell Out Walmart VSR (Bot Planeamiento-No Borrar) intento 4' in item.get_attribute('id'):
+            url = url_wmt_dl + item.get_attribute('id')
+            print('URL BACKUP 4')
+            print('url: ' + url)
+            break
+        if 'Sell Out Walmart VSR (Bot Planeamiento-No Borrar) intento 5' in item.get_attribute('id'):
+            url = url_wmt_dl + item.get_attribute('id')
+            print('URL BACKUP 5')
             print('url: ' + url)
             break
 
     browser.get(url)
-    time.sleep(90)
+    time.sleep(120)
     #pyautogui.hotkey('ctrl', 's')
 
     for file in os.listdir(ruta_descarga):
@@ -606,7 +627,6 @@ def wallmart():
 
     # mueve el archivo
     shutil.move(ruta_descarga + '\datos.txt', os.path.join(ruta_archivo_wallmart, 'datos.txt'))
-
     '''
     # click en url del explorador de windows
     left_click(646, 47)
@@ -744,8 +764,8 @@ def main():
         return
     '''
 
+    schedule.every().day.at("05:00").do(job2)
     schedule.every().day.at("06:00").do(job)
-    #schedule.every().day.at("10:00").do(job2)
 
     while True:
         schedule.run_pending()

@@ -20,38 +20,36 @@ ie_driver = "C:\\Users\\smunoz\\Documents\\Python\\WebBot\\IEDriverServer.exe"
 chrome_driver = "C:\\Users\\smunoz\\Documents\\Python\\WebBot\\chromedriver.exe"
 
 
-
 ## PARAMETROS CONFIGURABLES ##
 # MODIFICAR SOLO LO ESCRITO EN EL MANUAL #
 # datos SMU
 user_smu = '17596472-K'
-pass_smu = 'Rita2020'
+pass_smu = 'Rita2021'
 url_smu = 'https://b2b.smu.cl//Supermercados/BBRe-commerce/access/login.do'
 ruta_archivo_smu = 'M:\WebBot\SMU'
 ruta_pix_smu = 'mapeo_pix_smu/'
 
 # datos Cencosud
-user_cenco = '166076633'
-pass_cenco = 'Rita2033'
+user_cenco = '141667963'
+pass_cenco = 'Rita2021'
 url_cenco = 'https://www.cenconlineb2b.com/'
 ruta_archivo_cenco = 'M:\WebBot\Cenco'
 ruta_pix_cenco = 'mapeo_pix_cenco/'
 
 # datos Tottus
 rut_empresa = '86547900k'
-user_tottus = '166076633'
-pass_tottus = 'Rita2034'
+user_tottus = '141667963'
+pass_tottus = 'Rita2019'
 url_tottus = 'https://b2b.tottus.com/b2btoclpr/grafica/html/index.html'
 ruta_archivo_tottus = 'M:\WebBot\Tottus'
 ruta_pix_tottus = 'mapeo_pix_tottus/'
 
 # datos Walmart
 user_wmt = 'Soc439a'
-pass_wmt = 'Vodkaskyy76'
+pass_wmt = 'Vodkaskyy78'
 url_wmt = 'https://rllogin.wal-mart.com/rl_security/rl_logon.aspx?ServerType=IIS1&CTAuthMode=BASIC&language=en&CT_ORIG_URL=%2F&ct_orig_uri=%2F'
 url_wmt_dl = 'https://retaillink.wal-mart.com'
 ruta_archivo_wallmart = 'M:\WebBot\Wallmart'
-
 
 
 now = datetime.datetime.now()
@@ -198,17 +196,17 @@ def smu():
     browser.get(url_smu)
 
     time.sleep(20)
-    left_click(1016, 449)
-    left_click(1016, 449)
+    left_click(1016, 425)
+    left_click(1016, 425)
     time.sleep(0.25)
     pyautogui.typewrite(user_smu, interval=0.2)
     time.sleep(0.25)
-    left_click(1016, 473)
-    left_click(1016, 473)
+    left_click(1016, 449)
+    left_click(1016, 449)
     time.sleep(0.25)
     pyautogui.typewrite(pass_smu, interval=0.2)
     time.sleep(0.25)
-    left_click(989, 503)
+    left_click(989, 479)
 
     # click para sacar primer pop-up
     time.sleep(20)
@@ -249,6 +247,7 @@ def smu():
             coord_y2 += 23
 
         x, y = buscadia(calendar_coord_smu, ruta_pix_smu)
+        time.sleep(0.5)
         left_click(x, y)
         time.sleep(0.5)
 
@@ -533,8 +532,8 @@ def tottus():
     pyautogui.moveTo(201, 149, duration=0.5)
     pyautogui.mouseDown()
     pyautogui.moveTo(209, 149, duration=0.5)
-    pyautogui.moveTo(209, 293, duration=0.5)
-    left_click(209, 293)
+    pyautogui.moveTo(209, 248, duration=0.5)
+    left_click(209, 248)
     pyautogui.mouseUp()
     time.sleep(10)
 
@@ -618,7 +617,7 @@ def wallmart():
             break
 
     browser.get(url)
-    time.sleep(120)
+    time.sleep(240)
     #pyautogui.hotkey('ctrl', 's')
 
     for file in os.listdir(ruta_descarga):
@@ -765,7 +764,7 @@ def main():
     '''
 
     schedule.every().day.at("05:00").do(job2)
-    schedule.every().day.at("06:00").do(job)
+    schedule.every().day.at("13:54").do(job)
 
     while True:
         schedule.run_pending()
